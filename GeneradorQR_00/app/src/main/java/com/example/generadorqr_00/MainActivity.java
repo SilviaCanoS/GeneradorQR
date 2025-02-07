@@ -10,6 +10,10 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.Arrays;
+
 public class MainActivity extends AppCompatActivity {
 
     EditText editText;
@@ -18,7 +22,7 @@ public class MainActivity extends AppCompatActivity {
     RadioGroup radioGroup;
     RadioButton radioL7, radioM15, radioQ25, radioH30;
 
-    int errorCorrection = 7, version, tamanio, tamanioIndicador, bitsNecesarios, bitsTotales = 0;
+    int errorCorrection = 7, version, tamanio, tamanioIndicador, bitsNecesarios, bloquesCorreccion;
     String cifrado;
 
     @Override
@@ -56,22 +60,22 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 version = 1;
                 tamanio = 0;
-                String text = "hola mundo";
-                if(editText.getText().toString().isEmpty()) editText.setText("hola mundo"); //Control de error
+                String text = "HELLO WORLD";
+                if(editText.getText().toString().isEmpty()) editText.setText("HELLO WORLD"); //Control de error
                 else text = editText.getText().toString();
                 String binario = "";
 
                 //Analisis de datos: numerico o alfanumerico
                 if(text.matches("^[0-9]*$")) //Si es una cadena solo numerica
                 {
-                    cifrado = "0001 "; //Agregar el indicador de modo
+                    cifrado = "0001"; //Agregar el indicador de modo
                     if(text.length()%3 == 1) text += "  "; //Control de errores
                     else if(text.length()%3 == 2) text += " ";
                     //Dividir cada 3 caracteres y convertir a binario
                     for(int i = 0; i < text.length(); i += 3)
                     {
                         int decimal = Integer.parseInt(text.substring(i, i+3).trim()); //Convertir a decimal
-                        binario += Integer.toBinaryString(decimal) + " "; //Convertir a binario
+                        binario += Integer.toBinaryString(decimal); //Convertir a binario
                     }
 
                     switch (errorCorrection) //Determinar la versión más pequeña posible
@@ -176,7 +180,7 @@ public class MainActivity extends AppCompatActivity {
 
                 else if(text.matches("^[0-9A-Z$%*+-./: ]*$")) //Si es una cadena alfanumerica
                 {
-                    cifrado = "0010 "; //Agregar el indicador de modo
+                    cifrado = "0010"; //Agregar el indicador de modo
                     int limiteFor = text.length();
                     if(text.length()%2 == 1) limiteFor = text.length() - 1; //Control de errores
                     for(int i = 0; i < limiteFor; i += 2) //Separar cada 2 caracteres
@@ -185,7 +189,7 @@ public class MainActivity extends AppCompatActivity {
                         int alfa2 = ObtenerCodigoAlfa(text.charAt(i+1)); //Obtener codigo de la tabla
                         String auxBinario = Integer.toBinaryString(alfa1*45 + alfa2); //Convertir a binario
                         for(int j = auxBinario.length(); j < 11; j++) auxBinario = "0" + auxBinario; //Convertir a 11 bits
-                        binario += auxBinario + " ";
+                        binario += auxBinario;
                     }
                     if(text.length()%2 == 1) //Agregar el ultimo caracter si sobra
                     {
@@ -297,12 +301,12 @@ public class MainActivity extends AppCompatActivity {
 
                 else //Bytes
                 {
-                    cifrado = "0100 "; //Agregar el indicador de modo
+                    cifrado = "0100"; //Agregar el indicador de modo
                     for(int i = 0; i < text.length(); i++) //Convertir cada caracter en binario (ASCII)
                     {
-                        String auxBinario = Integer.toBinaryString((int)text.charAt(i)) + " ";
+                        String auxBinario = Integer.toBinaryString((int)text.charAt(i));
                         for(int j = auxBinario.length(); j <= 8; j++) auxBinario = "0" + auxBinario; //Convertir a 8 bits
-                        binario += auxBinario + " ";
+                        binario += auxBinario;
                     }
 
                     switch (errorCorrection) //Determinar la versión más pequeña posible
@@ -407,29 +411,7 @@ public class MainActivity extends AppCompatActivity {
 
                 if(version > 0) //Control de errores
                 {
-                    switch (version) //Determinar las dimensiones del codigo
-                    {
-                        case 1: tamanio = 21; break;
-                        case 2: tamanio = 25; break;
-                        case 3: tamanio = 29; break;
-                        case 4: tamanio = 33; break;
-                        case 5: tamanio = 37; break;
-                        case 6: tamanio = 41; break;
-                        case 7: tamanio = 45; break;
-                        case 8: tamanio = 49; break;
-                        case 9: tamanio = 53; break;
-                        case 10: tamanio = 57; break;
-                        case 11: tamanio = 61; break;
-                        case 12: tamanio = 65; break;
-                        case 13: tamanio = 69; break;
-                        case 14: tamanio = 73; break;
-                        case 15: tamanio = 77; break;
-                        case 16: tamanio = 81; break;
-                        case 17: tamanio = 85; break;
-                        case 18: tamanio = 89; break;
-                        case 19: tamanio = 93; break;
-                        case 20: tamanio = 97; break;
-                    }
+                    tamanio = 21 + (version-1)*4; //Determinar las dimensiones del codigo
 
                     //Determinar el tamaño del contador
                     if(cifrado.startsWith("0001") && version <= 9) tamanioIndicador = 10;
@@ -444,161 +426,170 @@ public class MainActivity extends AppCompatActivity {
                     int longContador = contador.length();
                     for (int i = 0; i < tamanioIndicador-longContador; i++) contador = "0" + contador;
 
-                    cifrado += contador + " " + binario; //Agregar el contador y los datos cifrados
+                    cifrado += contador + binario; //Agregar el contador y los datos cifrados
 
-                    switch (version) //Determinar el numero de bits necesarias
+                    switch (version) //Determinar el numero de bits necesarias y el numero de bloques de correccion necesarios
                     {
                         case 1:
-                            if(errorCorrection == 7) bitsNecesarios = 19;
-                            else if(errorCorrection == 15) bitsNecesarios = 16;
-                            else if(errorCorrection == 25) bitsNecesarios = 13;
-                            else if(errorCorrection == 30) bitsNecesarios = 9;
+                            if(errorCorrection == 7) {bitsNecesarios = 19; bloquesCorreccion = 7;}
+                            else if(errorCorrection == 15) {bitsNecesarios = 16; bloquesCorreccion = 10;}
+                            else if(errorCorrection == 25) {bitsNecesarios = 13; bloquesCorreccion = 13;}
+                            else if(errorCorrection == 30) {bitsNecesarios = 9; bloquesCorreccion = 17;}
                             break;
                         case 2:
-                            if(errorCorrection == 7) bitsNecesarios = 34;
-                            else if(errorCorrection == 15) bitsNecesarios = 28;
-                            else if(errorCorrection == 25) bitsNecesarios = 22;
-                            else if(errorCorrection == 30) bitsNecesarios = 16;
+                            if(errorCorrection == 7) {bitsNecesarios = 34; bloquesCorreccion = 10;}
+                            else if(errorCorrection == 15) {bitsNecesarios = 28; bloquesCorreccion = 16;}
+                            else if(errorCorrection == 25) {bitsNecesarios = 22; bloquesCorreccion = 22;}
+                            else if(errorCorrection == 30) {bitsNecesarios = 16; bloquesCorreccion = 28;}
                             break;
                         case 3:
-                            if(errorCorrection == 7) bitsNecesarios = 55;
-                            else if(errorCorrection == 15) bitsNecesarios = 44;
-                            else if(errorCorrection == 25) bitsNecesarios = 34;
-                            else if(errorCorrection == 30) bitsNecesarios = 26;
+                            if(errorCorrection == 7) {bitsNecesarios = 55; bloquesCorreccion = 15;}
+                            else if(errorCorrection == 15) {bitsNecesarios = 44; bloquesCorreccion = 26;}
+                            else if(errorCorrection == 25) {bitsNecesarios = 34; bloquesCorreccion = 18;}
+                            else if(errorCorrection == 30) {bitsNecesarios = 26; bloquesCorreccion = 22;}
                             break;
                         case 4:
-                            if(errorCorrection == 7) bitsNecesarios = 80;
-                            else if(errorCorrection == 15) bitsNecesarios = 64;
-                            else if(errorCorrection == 25) bitsNecesarios = 48;
-                            else if(errorCorrection == 30) bitsNecesarios = 36;
+                            if(errorCorrection == 7) {bitsNecesarios = 80; bloquesCorreccion = 20;}
+                            else if(errorCorrection == 15) {bitsNecesarios = 64; bloquesCorreccion = 18;}
+                            else if(errorCorrection == 25) {bitsNecesarios = 48; bloquesCorreccion = 26;}
+                            else if(errorCorrection == 30) {bitsNecesarios = 36; bloquesCorreccion = 16;}
                         case 5:
-                            if(errorCorrection == 7) bitsNecesarios = 108;
-                            else if(errorCorrection == 15) bitsNecesarios = 86;
-                            else if(errorCorrection == 25) bitsNecesarios = 62;
-                            else if(errorCorrection == 30) bitsNecesarios = 46;
+                            if(errorCorrection == 7) {bitsNecesarios = 108; bloquesCorreccion = 26;}
+                            else if(errorCorrection == 15) {bitsNecesarios = 86; bloquesCorreccion = 24;}
+                            else if(errorCorrection == 25) {bitsNecesarios = 62; bloquesCorreccion = 18;}
+                            else if(errorCorrection == 30) {bitsNecesarios = 46; bloquesCorreccion = 22;}
                             break;
                         case 6:
-                            if(errorCorrection == 7) bitsNecesarios = 136;
-                            else if(errorCorrection == 15) bitsNecesarios = 108;
-                            else if(errorCorrection == 25) bitsNecesarios = 76;
-                            else if(errorCorrection == 30) bitsNecesarios = 60;
+                            if(errorCorrection == 7) {bitsNecesarios = 136; bloquesCorreccion = 18;}
+                            else if(errorCorrection == 15) {bitsNecesarios = 108; bloquesCorreccion = 16;}
+                            else if(errorCorrection == 25) {bitsNecesarios = 76; bloquesCorreccion = 24;}
+                            else if(errorCorrection == 30) {bitsNecesarios = 60; bloquesCorreccion = 28;}
                             break;
                         case 7:
-                            if(errorCorrection == 7) bitsNecesarios = 156;
-                            else if(errorCorrection == 15) bitsNecesarios = 124;
-                            else if(errorCorrection == 25) bitsNecesarios = 88;
-                            else if(errorCorrection == 30) bitsNecesarios = 66;
+                            if(errorCorrection == 7) {bitsNecesarios = 156; bloquesCorreccion = 20;}
+                            else if(errorCorrection == 15) {bitsNecesarios = 124; bloquesCorreccion = 18;}
+                            else if(errorCorrection == 25) {bitsNecesarios = 88; bloquesCorreccion = 18;}
+                            else if(errorCorrection == 30) {bitsNecesarios = 66; bloquesCorreccion = 26;}
                             break;
                         case 8:
-                            if(errorCorrection == 7) bitsNecesarios = 194;
-                            else if(errorCorrection == 15) bitsNecesarios = 154;
-                            else if(errorCorrection == 25) bitsNecesarios = 110;
-                            else if(errorCorrection == 30) bitsNecesarios = 86;
+                            if(errorCorrection == 7) {bitsNecesarios = 194; bloquesCorreccion = 24;}
+                            else if(errorCorrection == 15) {bitsNecesarios = 154; bloquesCorreccion = 22;}
+                            else if(errorCorrection == 25) {bitsNecesarios = 110; bloquesCorreccion = 22;}
+                            else if(errorCorrection == 30) {bitsNecesarios = 86; bloquesCorreccion = 26;}
                             break;
                         case 9:
-                            if(errorCorrection == 7) bitsNecesarios = 232;
-                            else if(errorCorrection == 15) bitsNecesarios = 182;
-                            else if(errorCorrection == 25) bitsNecesarios = 132;
-                            else if(errorCorrection == 30) bitsNecesarios = 100;
+                            if(errorCorrection == 7) {bitsNecesarios = 232; bloquesCorreccion = 30;}
+                            else if(errorCorrection == 15) {bitsNecesarios = 182; bloquesCorreccion = 22;}
+                            else if(errorCorrection == 25) {bitsNecesarios = 132; bloquesCorreccion = 20;}
+                            else if(errorCorrection == 30) {bitsNecesarios = 100; bloquesCorreccion = 24;}
                             break;
                         case 10:
-                            if(errorCorrection == 7) bitsNecesarios = 274;
-                            else if(errorCorrection == 15) bitsNecesarios = 216;
-                            else if(errorCorrection == 25) bitsNecesarios = 154;
-                            else if(errorCorrection == 30) bitsNecesarios = 122;
+                            if(errorCorrection == 7) {bitsNecesarios = 274; bloquesCorreccion = 18;}
+                            else if(errorCorrection == 15) {bitsNecesarios = 216; bloquesCorreccion = 26;}
+                            else if(errorCorrection == 25) {bitsNecesarios = 154; bloquesCorreccion = 24;}
+                            else if(errorCorrection == 30) {bitsNecesarios = 122; bloquesCorreccion = 28;}
                             break;
                         case 11:
-                            if(errorCorrection == 7) bitsNecesarios = 324;
-                            else if(errorCorrection == 15) bitsNecesarios = 254;
-                            else if(errorCorrection == 25) bitsNecesarios = 180;
-                            else if(errorCorrection == 30) bitsNecesarios = 140;
+                            if(errorCorrection == 7) {bitsNecesarios = 324; bloquesCorreccion = 20;}
+                            else if(errorCorrection == 15) {bitsNecesarios = 254; bloquesCorreccion = 30;}
+                            else if(errorCorrection == 25) {bitsNecesarios = 180; bloquesCorreccion = 28;}
+                            else if(errorCorrection == 30) {bitsNecesarios = 140; bloquesCorreccion = 24;}
                             break;
                         case 12:
-                            if(errorCorrection == 7) bitsNecesarios = 370;
-                            else if(errorCorrection == 15) bitsNecesarios = 290;
-                            else if(errorCorrection == 25) bitsNecesarios = 206;
-                            else if(errorCorrection == 30) bitsNecesarios = 158;
+                            if(errorCorrection == 7) {bitsNecesarios = 370; bloquesCorreccion = 24;}
+                            else if(errorCorrection == 15) {bitsNecesarios = 290; bloquesCorreccion = 22;}
+                            else if(errorCorrection == 25) {bitsNecesarios = 206; bloquesCorreccion = 26;}
+                            else if(errorCorrection == 30) {bitsNecesarios = 158; bloquesCorreccion = 28;}
                             break;
                         case 13:
-                            if(errorCorrection == 7) bitsNecesarios = 428;
-                            else if(errorCorrection == 15) bitsNecesarios = 334;
-                            else if(errorCorrection == 25) bitsNecesarios = 244;
-                            else if(errorCorrection == 30) bitsNecesarios = 180;
+                            if(errorCorrection == 7) {bitsNecesarios = 428; bloquesCorreccion = 26;}
+                            else if(errorCorrection == 15) {bitsNecesarios = 334; bloquesCorreccion = 22;}
+                            else if(errorCorrection == 25) {bitsNecesarios = 244; bloquesCorreccion = 24;}
+                            else if(errorCorrection == 30) {bitsNecesarios = 180; bloquesCorreccion = 22;}
                             break;
                         case 14:
-                            if(errorCorrection == 7) bitsNecesarios = 461;
-                            else if(errorCorrection == 15) bitsNecesarios = 365;
-                            else if(errorCorrection == 25) bitsNecesarios = 261;
-                            else if(errorCorrection == 30) bitsNecesarios = 197;
+                            if(errorCorrection == 7) {bitsNecesarios = 461; bloquesCorreccion = 30;}
+                            else if(errorCorrection == 15) {bitsNecesarios = 365; bloquesCorreccion = 24;}
+                            else if(errorCorrection == 25) {bitsNecesarios = 261; bloquesCorreccion = 20;}
+                            else if(errorCorrection == 30) {bitsNecesarios = 197; bloquesCorreccion = 24;}
                             break;
                         case 15:
-                            if(errorCorrection == 7) bitsNecesarios = 523;
-                            else if(errorCorrection == 15) bitsNecesarios = 415;
-                            else if(errorCorrection == 25) bitsNecesarios = 295;
-                            else if(errorCorrection == 30) bitsNecesarios = 223;
+                            if(errorCorrection == 7) {bitsNecesarios = 523; bloquesCorreccion = 22;}
+                            else if(errorCorrection == 15) {bitsNecesarios = 415; bloquesCorreccion = 24;}
+                            else if(errorCorrection == 25) {bitsNecesarios = 295; bloquesCorreccion = 30;}
+                            else if(errorCorrection == 30) {bitsNecesarios = 223; bloquesCorreccion = 24;}
                             break;
                         case 16:
-                            if(errorCorrection == 7) bitsNecesarios = 589;
-                            else if(errorCorrection == 15) bitsNecesarios = 453;
-                            else if(errorCorrection == 25) bitsNecesarios = 325;
-                            else if(errorCorrection == 30) bitsNecesarios = 253;
+                            if(errorCorrection == 7) {bitsNecesarios = 589; bloquesCorreccion = 24;}
+                            else if(errorCorrection == 15) {bitsNecesarios = 453; bloquesCorreccion = 28;}
+                            else if(errorCorrection == 25) {bitsNecesarios = 325; bloquesCorreccion = 24;}
+                            else if(errorCorrection == 30) {bitsNecesarios = 253; bloquesCorreccion = 30;}
                             break;
                         case 17:
-                            if(errorCorrection == 7) bitsNecesarios = 647;
-                            else if(errorCorrection == 15) bitsNecesarios = 507;
-                            else if(errorCorrection == 25) bitsNecesarios = 367;
-                            else if(errorCorrection == 30) bitsNecesarios = 283;
+                            if(errorCorrection == 7) {bitsNecesarios = 647; bloquesCorreccion = 28;}
+                            else if(errorCorrection == 15) {bitsNecesarios = 507; bloquesCorreccion = 28;}
+                            else if(errorCorrection == 25) {bitsNecesarios = 367; bloquesCorreccion = 28;}
+                            else if(errorCorrection == 30) {bitsNecesarios = 283; bloquesCorreccion = 28;}
                             break;
                         case 18:
-                            if(errorCorrection == 7) bitsNecesarios = 721;
-                            else if(errorCorrection == 15) bitsNecesarios = 563;
-                            else if(errorCorrection == 25) bitsNecesarios = 397;
-                            else if(errorCorrection == 30) bitsNecesarios = 313;
+                            if(errorCorrection == 7) {bitsNecesarios = 721; bloquesCorreccion = 30;}
+                            else if(errorCorrection == 15) {bitsNecesarios = 563; bloquesCorreccion = 26;}
+                            else if(errorCorrection == 25) {bitsNecesarios = 397; bloquesCorreccion = 28;}
+                            else if(errorCorrection == 30) {bitsNecesarios = 313; bloquesCorreccion = 28;}
                             break;
                         case 19:
-                            if(errorCorrection == 7) bitsNecesarios = 795;
-                            else if(errorCorrection == 15) bitsNecesarios = 627;
-                            else if(errorCorrection == 25) bitsNecesarios = 445;
-                            else if(errorCorrection == 30) bitsNecesarios = 341;
+                            if(errorCorrection == 7) {bitsNecesarios = 795; bloquesCorreccion = 28;}
+                            else if(errorCorrection == 15) {bitsNecesarios = 627; bloquesCorreccion = 26;}
+                            else if(errorCorrection == 25) {bitsNecesarios = 445; bloquesCorreccion = 26;}
+                            else if(errorCorrection == 30) {bitsNecesarios = 341; bloquesCorreccion = 26;}
                             break;
                         case 20:
-                            if(errorCorrection == 7) bitsNecesarios = 861;
-                            else if(errorCorrection == 15) bitsNecesarios = 669;
-                            else if(errorCorrection == 25) bitsNecesarios = 485;
-                            else if(errorCorrection == 30) bitsNecesarios = 385;
+                            if(errorCorrection == 7) {bitsNecesarios = 861; bloquesCorreccion = 28;}
+                            else if(errorCorrection == 15) {bitsNecesarios = 669; bloquesCorreccion = 26;}
+                            else if(errorCorrection == 25) {bitsNecesarios = 485; bloquesCorreccion = 30;}
+                            else if(errorCorrection == 30) {bitsNecesarios = 385; bloquesCorreccion = 28;}
                             break;
                     }
                     bitsNecesarios *= 8;
                     textViewVersion.setText("Versión: " + version + " - Tamaño: " + tamanio + "x" + tamanio
                             + " - Bits: " + bitsNecesarios);
 
-                    bitsTotales = 0;  //Medir la longitud de la cadena sin espacios
-                    for (int i = 0; i < cifrado.length(); i++)
-                    { if(cifrado.charAt(i) != ' ') bitsTotales++; }
+                    if(bitsNecesarios - cifrado.length() == 1) cifrado += "0"; //Agregar el terminador
+                    else if(bitsNecesarios - cifrado.length() == 2) cifrado += "00";
+                    else if(bitsNecesarios - cifrado.length() == 3) cifrado += "000";
+                    else if(bitsNecesarios - cifrado.length() >= 4) cifrado += "0000";
 
+                    while (cifrado.length()%8 != 0) cifrado += "0"; //Revisar que los bits totales sean multiplos de 8
 
-                    if(bitsNecesarios - bitsTotales == 1) {cifrado += " " + "0"; bitsTotales++;}//Agregar el terminador
-                    else if(bitsNecesarios - bitsTotales == 2) {cifrado += " " + "00"; bitsTotales += 2;}
-                    else if(bitsNecesarios - bitsTotales == 3) {cifrado += " " + "000"; bitsTotales += 3;}
-                    else if(bitsNecesarios - bitsTotales >= 4) {cifrado += " " + "0000"; bitsTotales += 4;}
-
-                    while (bitsTotales%8 != 0)//Revisar que los bits totales sean multiplos de 8
+                    while (cifrado.length() < bitsNecesarios) //Revisar que la cadena alcance el valor deseado
                     {
-                        cifrado += "0";
-                        bitsTotales++;
-                    }
-
-                    while (bitsTotales < bitsNecesarios) //Revisar que la cadena alcance el valor deseado
-                    {
-                        cifrado += " " + "11101100";
-                        bitsTotales += 8;
-                        if(bitsTotales < bitsNecesarios)
-                        {
-                            cifrado += " " + "00010001";
-                            bitsTotales += 8;
-                        }
+                        cifrado += "11101100";
+                        if(cifrado.length() < bitsNecesarios) cifrado += "00010001";
                     }
                     textViewBinario.setText(cifrado);
+
+                    //Preparar el mensaje polinomial, el numero es el coeficiente y el indice es el exponente de x
+                    int[] polinomio = new int[bitsNecesarios/8]; //Dividir la cadena en bloques de 8 y convertir a decimal
+                    int reversa = polinomio.length - 1;
+                    for(int i = 0; i < cifrado.length(); i += 8)
+                    {
+                        polinomio[reversa] = Integer.parseInt(cifrado.substring(i, i+8),2);
+                        reversa--;
+                    } //A los indices hay que sumarles la variable bloquesCorreccion para usarlos
+
+                    //Calcular por cuanto se debe multiplicar el generador polinomial para que el primer elemento (ultimo en el arreglo)
+                    //tenga el mismo exponente de x que el primer elemento (ultimo en el arreglo) del polinomio
+                    //A los indices hay que sumarles esta variable para usarlos
+                    //int sumarGenPolinomial = polinomio.length-1 + bloquesCorreccion - genPolinomial.length-1;
+
+                    int numPasosDivision = polinomio.length; //XOR el generador polinomial con el mensaje polinomial
+                    for(int i = 0; i < numPasosDivision; i++) polinomio = XORprocedimiento(polinomio);
+
+                    String aux = "";
+                    for(int i = 0; i < polinomio.length; i++) aux += polinomio[i] + " ";
+                    textViewBinario.setText(aux);
+
+                    int[] residuio = new int[bloquesCorreccion];
                 }
             }
         });
@@ -653,6 +644,105 @@ public class MainActivity extends AppCompatActivity {
             case '/': return 43;
             case ':': return 44;
             default: return 45;
+        }
+    }
+
+    public int TablaLog(int polinomio0)
+    {
+        if(polinomio0==1 || polinomio0==2 || polinomio0==4 || polinomio0==8 || polinomio0==16 || polinomio0==32 || polinomio0==64 || polinomio0==128)
+            return (int)(Math.log10(polinomio0)/Math.log10(2));
+        else
+        {
+            int auxPolinomio = 128;
+            for(int i = 8; i < 256; i++)
+            {
+                auxPolinomio *= 2;
+                if(auxPolinomio >= 256) auxPolinomio = auxPolinomio ^ 285;
+                if(auxPolinomio == polinomio0) return i;
+            }
+        }
+        return 0;
+    }
+
+    public int TablaAntilog(int auxGenPolinomial)
+    {
+        if(auxGenPolinomial < 8) return (int)Math.pow(2, auxGenPolinomial);
+        else
+        {
+            int auxPolinomio = 128;
+            for(int j = 8; j <= auxGenPolinomial; j++)
+            {
+                auxPolinomio *= 2;
+                if(auxPolinomio >= 256) auxPolinomio = auxPolinomio ^ 285;
+            }
+            return auxPolinomio;
+        }
+    }
+
+    public int[] DefinirGeneradorPolinomial(int bloques)
+    {
+        switch (bloques)
+        {
+            case 7: return new int[]{21, 102, 238, 149, 146, 229, 87, 0};
+            case 10: return new int[]{45, 32, 94, 64, 70, 118, 61, 46, 67, 251, 0};
+            case 13: return new int[]{78, 140, 206, 218, 130, 104, 106, 100, 86, 100, 176, 152, 74, 0};
+            case 15: return new int[]{105, 99, 5, 124, 140, 237, 58, 58, 51, 37, 202, 91, 61, 183, 8, 0};
+            case 16: return new int[]{120, 225, 194, 182, 169, 147, 191, 91, 3, 76, 161, 102, 109, 107, 104, 120, 0};
+            case 17: return new int[]{136, 163, 243, 39, 150, 99, 24, 147, 214, 206, 123, 239, 43, 78, 206, 139, 43, 0};
+            case 18: return new int[]{153, 96, 98, 5, 179, 252, 148, 152, 187, 79, 170, 118, 97, 184, 94, 158, 234, 215, 0};
+            case 20: return new int[]{190, 188, 212, 212, 164, 156, 239, 83, 225, 221, 180, 202, 187, 26, 163, 61, 50, 79, 60, 17, 0};
+            case 22: return new int[]{231, 165, 105, 160, 134, 219, 80, 98, 172, 8, 74, 200, 53, 221, 109, 14, 230, 93, 242, 247, 171, 210, 0};
+            case 24: return new int[]{21, 227, 96, 87, 232, 117, 0, 111, 218, 228, 226, 192, 152, 169, 180, 159, 126, 251, 117, 211, 48, 135, 121, 229, 0};
+            case 26: return new int[]{70, 218, 145, 153, 227, 48, 102, 13, 142, 245, 21, 161, 53, 165,
+                    28, 111, 201, 145, 17, 118, 182, 103, 2, 158, 125, 173, 0};
+            case 28: return new int[]{123, 9, 37, 242, 119, 212, 195, 42, 87, 245, 43, 21, 201, 232, 27,
+                    205, 147, 195, 190, 110, 180, 108, 234, 224, 104, 200, 223, 168, 0};
+            case 30: return new int[]{180, 192, 40, 238, 216, 251, 37, 156, 130, 224, 193, 226, 173, 42,
+                    125, 222, 96, 239, 86, 110, 48, 50, 182, 179, 31, 216, 152, 145, 173, 41, 0};
+            default: return new int[0];
+        }
+    }
+
+    public int[] XORprocedimiento(int[] polinomio)
+    {
+        //Definir el generador polinomial, el numero es el exponente de 2 y el indice es el exponente de x
+        int[] genPolinomial = DefinirGeneradorPolinomial(bloquesCorreccion);
+
+        //Convertir el primer elemento del mensaje polinomial a la notación alfa - log
+        int alfaPolinomio = TablaLog(polinomio[polinomio.length-1]);
+
+        //Multiplicar el generador polinomial por el primer elemento del mensaje polinomial en su notacion alfa
+        for(int i = 0; i < genPolinomial.length; i++)
+        {
+            genPolinomial[i] = genPolinomial[i] + alfaPolinomio;
+            if(genPolinomial[i] >= 256) genPolinomial[i] = genPolinomial[i] % 255;
+
+            genPolinomial[i] = TablaAntilog(genPolinomial[i]); //Convertir de la notacion alfa a decimal - Antilog
+        }
+
+        if(polinomio.length > genPolinomial.length)  //Si el generador polinomial es mas chico que el mensaje polinomial
+        {
+            int longPolinomio = polinomio.length - 1; //XOR el generador polinomial con el mensaje polinomial
+            for(int i = genPolinomial.length-1; i >= 0; i--)
+            {
+                polinomio[longPolinomio] = genPolinomial[i] ^ polinomio[longPolinomio];
+                longPolinomio--;
+            } //XOR el restante del mensaje polinomial con 0
+            for(int i = 0; i < polinomio.length-genPolinomial.length; i++) polinomio[i] = polinomio[i] ^ 0;
+            return Arrays.copyOf(polinomio, polinomio.length-1);
+        }
+        else
+        {
+            int longPolinomio = genPolinomial.length - 1; //XOR el generador polinomial con el mensaje polinomial
+            for(int i = polinomio.length-1; i >= 0; i--)
+            {
+                genPolinomial[longPolinomio] = polinomio[i] ^ genPolinomial[longPolinomio];
+                longPolinomio--;
+            }
+            for(int i = 0; i < genPolinomial.length-polinomio.length; i++) genPolinomial[i] = genPolinomial[i] ^ 0;
+
+            //Eliminar el primer elemento del mensaje polinomial, que resulta en 0
+            return Arrays.copyOf(genPolinomial, genPolinomial.length-1);
         }
     }
 }
