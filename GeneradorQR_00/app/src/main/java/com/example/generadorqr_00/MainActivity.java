@@ -22,7 +22,7 @@ public class MainActivity extends AppCompatActivity {
     RadioGroup radioGroup;
     RadioButton radioL7, radioM15, radioQ25, radioH30;
 
-    int errorCorrection = 7, version, tamanio, tamanioIndicador, bitsNecesarios, bloquesCorreccion;
+    int errorCorrection = 7, version, tamanio, tamanioIndicador, bitsNecesarios, bloquesCorreccion, bloquesGrupo1, codewordsGrupo1, bloquesGrupo2, codewordsGrupo2;
     String cifrado;
 
     @Override
@@ -431,123 +431,203 @@ public class MainActivity extends AppCompatActivity {
                     switch (version) //Determinar el numero de bits necesarias y el numero de bloques de correccion necesarios
                     {
                         case 1:
-                            if(errorCorrection == 7) {bitsNecesarios = 19; bloquesCorreccion = 7;}
-                            else if(errorCorrection == 15) {bitsNecesarios = 16; bloquesCorreccion = 10;}
-                            else if(errorCorrection == 25) {bitsNecesarios = 13; bloquesCorreccion = 13;}
-                            else if(errorCorrection == 30) {bitsNecesarios = 9; bloquesCorreccion = 17;}
+                            if(errorCorrection == 7) {bitsNecesarios = 19; bloquesCorreccion = 7;
+                                bloquesGrupo1 = 1; codewordsGrupo1 = 19; bloquesGrupo2 = 0; codewordsGrupo2 = 0;}
+                            else if(errorCorrection == 15) {bitsNecesarios = 16; bloquesCorreccion = 10;
+                                bloquesGrupo1 = 1; codewordsGrupo1 = 16; bloquesGrupo2 = 0; codewordsGrupo2 = 0;}
+                            else if(errorCorrection == 25) {bitsNecesarios = 13; bloquesCorreccion = 13;
+                                bloquesGrupo1 = 1; codewordsGrupo1 = 13; bloquesGrupo2 = 0; codewordsGrupo2 = 0;}
+                            else if(errorCorrection == 30) {bitsNecesarios = 9; bloquesCorreccion = 17;
+                                bloquesGrupo1 = 1; codewordsGrupo1 = 9; bloquesGrupo2 = 0; codewordsGrupo2 = 0;}
                             break;
                         case 2:
-                            if(errorCorrection == 7) {bitsNecesarios = 34; bloquesCorreccion = 10;}
-                            else if(errorCorrection == 15) {bitsNecesarios = 28; bloquesCorreccion = 16;}
-                            else if(errorCorrection == 25) {bitsNecesarios = 22; bloquesCorreccion = 22;}
-                            else if(errorCorrection == 30) {bitsNecesarios = 16; bloquesCorreccion = 28;}
+                            if(errorCorrection == 7) {bitsNecesarios = 34; bloquesCorreccion = 10;
+                                bloquesGrupo1 = 1; codewordsGrupo1 = 34; bloquesGrupo2 = 0; codewordsGrupo2 = 0;}
+                            else if(errorCorrection == 15) {bitsNecesarios = 28; bloquesCorreccion = 16;
+                                bloquesGrupo1 = 1; codewordsGrupo1 = 28; bloquesGrupo2 = 0; codewordsGrupo2 = 0;}
+                            else if(errorCorrection == 25) {bitsNecesarios = 22; bloquesCorreccion = 22;
+                                bloquesGrupo1 = 1; codewordsGrupo1 = 22; bloquesGrupo2 = 0; codewordsGrupo2 = 0;}
+                            else if(errorCorrection == 30) {bitsNecesarios = 16; bloquesCorreccion = 28;
+                                bloquesGrupo1 = 1; codewordsGrupo1 = 16; bloquesGrupo2 = 0; codewordsGrupo2 = 0;}
                             break;
                         case 3:
-                            if(errorCorrection == 7) {bitsNecesarios = 55; bloquesCorreccion = 15;}
-                            else if(errorCorrection == 15) {bitsNecesarios = 44; bloquesCorreccion = 26;}
-                            else if(errorCorrection == 25) {bitsNecesarios = 34; bloquesCorreccion = 18;}
-                            else if(errorCorrection == 30) {bitsNecesarios = 26; bloquesCorreccion = 22;}
+                            if(errorCorrection == 7) {bitsNecesarios = 55; bloquesCorreccion = 15;
+                                bloquesGrupo1 = 1; codewordsGrupo1 = 55; bloquesGrupo2 = 0; codewordsGrupo2 = 0;}
+                            else if(errorCorrection == 15) {bitsNecesarios = 44; bloquesCorreccion = 26;
+                                bloquesGrupo1 = 1; codewordsGrupo1 = 44; bloquesGrupo2 = 0; codewordsGrupo2 = 0;}
+                            else if(errorCorrection == 25) {bitsNecesarios = 34; bloquesCorreccion = 18;
+                                bloquesGrupo1 = 2; codewordsGrupo1 = 17; bloquesGrupo2 = 0; codewordsGrupo2 = 0;}
+                            else if(errorCorrection == 30) {bitsNecesarios = 26; bloquesCorreccion = 22;
+                                bloquesGrupo1 = 2; codewordsGrupo1 = 13; bloquesGrupo2 = 0; codewordsGrupo2 = 0;}
                             break;
                         case 4:
-                            if(errorCorrection == 7) {bitsNecesarios = 80; bloquesCorreccion = 20;}
-                            else if(errorCorrection == 15) {bitsNecesarios = 64; bloquesCorreccion = 18;}
-                            else if(errorCorrection == 25) {bitsNecesarios = 48; bloquesCorreccion = 26;}
-                            else if(errorCorrection == 30) {bitsNecesarios = 36; bloquesCorreccion = 16;}
+                            if(errorCorrection == 7) {bitsNecesarios = 80; bloquesCorreccion = 20;
+                                bloquesGrupo1 = 1; codewordsGrupo1 = 80; bloquesGrupo2 = 0; codewordsGrupo2 = 0;}
+                            else if(errorCorrection == 15) {bitsNecesarios = 64; bloquesCorreccion = 18;
+                                bloquesGrupo1 = 2; codewordsGrupo1 = 32; bloquesGrupo2 = 0; codewordsGrupo2 = 0;}
+                            else if(errorCorrection == 25) {bitsNecesarios = 48; bloquesCorreccion = 26;
+                                bloquesGrupo1 = 2; codewordsGrupo1 = 24; bloquesGrupo2 = 0; codewordsGrupo2 = 0;}
+                            else if(errorCorrection == 30) {bitsNecesarios = 36; bloquesCorreccion = 16;
+                                bloquesGrupo1 = 4; codewordsGrupo1 = 9; bloquesGrupo2 = 0; codewordsGrupo2 = 0;}
                         case 5:
-                            if(errorCorrection == 7) {bitsNecesarios = 108; bloquesCorreccion = 26;}
-                            else if(errorCorrection == 15) {bitsNecesarios = 86; bloquesCorreccion = 24;}
-                            else if(errorCorrection == 25) {bitsNecesarios = 62; bloquesCorreccion = 18;}
-                            else if(errorCorrection == 30) {bitsNecesarios = 46; bloquesCorreccion = 22;}
+                            if(errorCorrection == 7) {bitsNecesarios = 108; bloquesCorreccion = 26;
+                                bloquesGrupo1 = 1; codewordsGrupo1 = 108; bloquesGrupo2 = 0; codewordsGrupo2 = 0;}
+                            else if(errorCorrection == 15) {bitsNecesarios = 86; bloquesCorreccion = 24;
+                                bloquesGrupo1 = 2; codewordsGrupo1 = 43; bloquesGrupo2 = 0; codewordsGrupo2 = 0;}
+                            else if(errorCorrection == 25) {bitsNecesarios = 62; bloquesCorreccion = 18;
+                                bloquesGrupo1 = 2; codewordsGrupo1 = 15; bloquesGrupo2 = 2; codewordsGrupo2 = 16;}
+                            else if(errorCorrection == 30) {bitsNecesarios = 46; bloquesCorreccion = 22;
+                                bloquesGrupo1 = 2; codewordsGrupo1 = 11; bloquesGrupo2 = 2; codewordsGrupo2 = 12;}
                             break;
                         case 6:
-                            if(errorCorrection == 7) {bitsNecesarios = 136; bloquesCorreccion = 18;}
-                            else if(errorCorrection == 15) {bitsNecesarios = 108; bloquesCorreccion = 16;}
-                            else if(errorCorrection == 25) {bitsNecesarios = 76; bloquesCorreccion = 24;}
-                            else if(errorCorrection == 30) {bitsNecesarios = 60; bloquesCorreccion = 28;}
+                            if(errorCorrection == 7) {bitsNecesarios = 136; bloquesCorreccion = 18;
+                                bloquesGrupo1 = 2; codewordsGrupo1 = 68; bloquesGrupo2 = 0; codewordsGrupo2 = 0;}
+                            else if(errorCorrection == 15) {bitsNecesarios = 108; bloquesCorreccion = 16;
+                                bloquesGrupo1 = 4; codewordsGrupo1 = 27; bloquesGrupo2 = 0; codewordsGrupo2 = 0;}
+                            else if(errorCorrection == 25) {bitsNecesarios = 76; bloquesCorreccion = 24;
+                                bloquesGrupo1 = 4; codewordsGrupo1 = 19; bloquesGrupo2 = 0; codewordsGrupo2 = 0;}
+                            else if(errorCorrection == 30) {bitsNecesarios = 60; bloquesCorreccion = 28;
+                                bloquesGrupo1 = 4; codewordsGrupo1 = 15; bloquesGrupo2 = 0; codewordsGrupo2 = 0;}
                             break;
                         case 7:
-                            if(errorCorrection == 7) {bitsNecesarios = 156; bloquesCorreccion = 20;}
-                            else if(errorCorrection == 15) {bitsNecesarios = 124; bloquesCorreccion = 18;}
-                            else if(errorCorrection == 25) {bitsNecesarios = 88; bloquesCorreccion = 18;}
-                            else if(errorCorrection == 30) {bitsNecesarios = 66; bloquesCorreccion = 26;}
+                            if(errorCorrection == 7) {bitsNecesarios = 156; bloquesCorreccion = 20;
+                                bloquesGrupo1 = 2; codewordsGrupo1 = 78; bloquesGrupo2 = 0; codewordsGrupo2 = 0;}
+                            else if(errorCorrection == 15) {bitsNecesarios = 124; bloquesCorreccion = 18;
+                                bloquesGrupo1 = 4; codewordsGrupo1 = 31; bloquesGrupo2 = 0; codewordsGrupo2 = 0;}
+                            else if(errorCorrection == 25) {bitsNecesarios = 88; bloquesCorreccion = 18;
+                                bloquesGrupo1 = 2; codewordsGrupo1 = 14; bloquesGrupo2 = 4; codewordsGrupo2 = 15;}
+                            else if(errorCorrection == 30) {bitsNecesarios = 66; bloquesCorreccion = 26;
+                                bloquesGrupo1 = 4; codewordsGrupo1 = 13; bloquesGrupo2 = 1; codewordsGrupo2 = 14;}
                             break;
                         case 8:
-                            if(errorCorrection == 7) {bitsNecesarios = 194; bloquesCorreccion = 24;}
-                            else if(errorCorrection == 15) {bitsNecesarios = 154; bloquesCorreccion = 22;}
-                            else if(errorCorrection == 25) {bitsNecesarios = 110; bloquesCorreccion = 22;}
-                            else if(errorCorrection == 30) {bitsNecesarios = 86; bloquesCorreccion = 26;}
+                            if(errorCorrection == 7) {bitsNecesarios = 194; bloquesCorreccion = 24;
+                                bloquesGrupo1 = 2; codewordsGrupo1 = 97; bloquesGrupo2 = 0; codewordsGrupo2 = 0;}
+                            else if(errorCorrection == 15) {bitsNecesarios = 154; bloquesCorreccion = 22;
+                                bloquesGrupo1 = 2; codewordsGrupo1 = 38; bloquesGrupo2 = 2; codewordsGrupo2 = 39;}
+                            else if(errorCorrection == 25) {bitsNecesarios = 110; bloquesCorreccion = 22;
+                                bloquesGrupo1 = 4; codewordsGrupo1 = 18; bloquesGrupo2 = 2; codewordsGrupo2 = 19;}
+                            else if(errorCorrection == 30) {bitsNecesarios = 86; bloquesCorreccion = 26;
+                                bloquesGrupo1 = 4; codewordsGrupo1 = 14; bloquesGrupo2 = 2; codewordsGrupo2 = 15;}
                             break;
                         case 9:
-                            if(errorCorrection == 7) {bitsNecesarios = 232; bloquesCorreccion = 30;}
-                            else if(errorCorrection == 15) {bitsNecesarios = 182; bloquesCorreccion = 22;}
-                            else if(errorCorrection == 25) {bitsNecesarios = 132; bloquesCorreccion = 20;}
-                            else if(errorCorrection == 30) {bitsNecesarios = 100; bloquesCorreccion = 24;}
+                            if(errorCorrection == 7) {bitsNecesarios = 232; bloquesCorreccion = 30;
+                                bloquesGrupo1 = 2; codewordsGrupo1 = 116; bloquesGrupo2 = 0; codewordsGrupo2 = 0;}
+                            else if(errorCorrection == 15) {bitsNecesarios = 182; bloquesCorreccion = 22;
+                                bloquesGrupo1 = 3; codewordsGrupo1 = 36; bloquesGrupo2 = 2; codewordsGrupo2 = 37;}
+                            else if(errorCorrection == 25) {bitsNecesarios = 132; bloquesCorreccion = 20;
+                                bloquesGrupo1 = 4; codewordsGrupo1 = 16; bloquesGrupo2 = 4; codewordsGrupo2 = 17;}
+                            else if(errorCorrection == 30) {bitsNecesarios = 100; bloquesCorreccion = 24;
+                                bloquesGrupo1 = 4; codewordsGrupo1 = 12; bloquesGrupo2 = 4; codewordsGrupo2 = 13;}
                             break;
                         case 10:
-                            if(errorCorrection == 7) {bitsNecesarios = 274; bloquesCorreccion = 18;}
-                            else if(errorCorrection == 15) {bitsNecesarios = 216; bloquesCorreccion = 26;}
-                            else if(errorCorrection == 25) {bitsNecesarios = 154; bloquesCorreccion = 24;}
-                            else if(errorCorrection == 30) {bitsNecesarios = 122; bloquesCorreccion = 28;}
+                            if(errorCorrection == 7) {bitsNecesarios = 274; bloquesCorreccion = 18;
+                                bloquesGrupo1 = 2; codewordsGrupo1 = 68; bloquesGrupo2 = 2; codewordsGrupo2 = 69;}
+                            else if(errorCorrection == 15) {bitsNecesarios = 216; bloquesCorreccion = 26;
+                                bloquesGrupo1 = 4; codewordsGrupo1 = 43; bloquesGrupo2 = 1; codewordsGrupo2 = 44;}
+                            else if(errorCorrection == 25) {bitsNecesarios = 154; bloquesCorreccion = 24;
+                                bloquesGrupo1 = 6; codewordsGrupo1 = 19; bloquesGrupo2 = 2; codewordsGrupo2 = 20;}
+                            else if(errorCorrection == 30) {bitsNecesarios = 122; bloquesCorreccion = 28;
+                                bloquesGrupo1 = 6; codewordsGrupo1 = 15; bloquesGrupo2 = 2; codewordsGrupo2 = 16;}
                             break;
                         case 11:
-                            if(errorCorrection == 7) {bitsNecesarios = 324; bloquesCorreccion = 20;}
-                            else if(errorCorrection == 15) {bitsNecesarios = 254; bloquesCorreccion = 30;}
-                            else if(errorCorrection == 25) {bitsNecesarios = 180; bloquesCorreccion = 28;}
-                            else if(errorCorrection == 30) {bitsNecesarios = 140; bloquesCorreccion = 24;}
+                            if(errorCorrection == 7) {bitsNecesarios = 324; bloquesCorreccion = 20;
+                                bloquesGrupo1 = 4; codewordsGrupo1 = 81; bloquesGrupo2 = 0; codewordsGrupo2 = 0;}
+                            else if(errorCorrection == 15) {bitsNecesarios = 254; bloquesCorreccion = 30;
+                                bloquesGrupo1 = 1; codewordsGrupo1 = 50; bloquesGrupo2 = 4; codewordsGrupo2 = 51;}
+                            else if(errorCorrection == 25) {bitsNecesarios = 180; bloquesCorreccion = 28;
+                                bloquesGrupo1 = 4; codewordsGrupo1 = 22; bloquesGrupo2 = 4; codewordsGrupo2 = 23;}
+                            else if(errorCorrection == 30) {bitsNecesarios = 140; bloquesCorreccion = 24;
+                                bloquesGrupo1 = 3; codewordsGrupo1 = 12; bloquesGrupo2 = 8; codewordsGrupo2 = 13;}
                             break;
                         case 12:
-                            if(errorCorrection == 7) {bitsNecesarios = 370; bloquesCorreccion = 24;}
-                            else if(errorCorrection == 15) {bitsNecesarios = 290; bloquesCorreccion = 22;}
-                            else if(errorCorrection == 25) {bitsNecesarios = 206; bloquesCorreccion = 26;}
-                            else if(errorCorrection == 30) {bitsNecesarios = 158; bloquesCorreccion = 28;}
+                            if(errorCorrection == 7) {bitsNecesarios = 370; bloquesCorreccion = 24;
+                                bloquesGrupo1 = 2; codewordsGrupo1 = 92; bloquesGrupo2 = 2; codewordsGrupo2 = 93;}
+                            else if(errorCorrection == 15) {bitsNecesarios = 290; bloquesCorreccion = 22;
+                                bloquesGrupo1 = 6; codewordsGrupo1 = 36; bloquesGrupo2 = 2; codewordsGrupo2 = 37;}
+                            else if(errorCorrection == 25) {bitsNecesarios = 206; bloquesCorreccion = 26;
+                                bloquesGrupo1 = 4; codewordsGrupo1 = 20; bloquesGrupo2 = 6; codewordsGrupo2 = 21;}
+                            else if(errorCorrection == 30) {bitsNecesarios = 158; bloquesCorreccion = 28;
+                                bloquesGrupo1 = 7; codewordsGrupo1 = 14; bloquesGrupo2 = 4; codewordsGrupo2 = 15;}
                             break;
                         case 13:
-                            if(errorCorrection == 7) {bitsNecesarios = 428; bloquesCorreccion = 26;}
-                            else if(errorCorrection == 15) {bitsNecesarios = 334; bloquesCorreccion = 22;}
-                            else if(errorCorrection == 25) {bitsNecesarios = 244; bloquesCorreccion = 24;}
-                            else if(errorCorrection == 30) {bitsNecesarios = 180; bloquesCorreccion = 22;}
+                            if(errorCorrection == 7) {bitsNecesarios = 428; bloquesCorreccion = 26;
+                                bloquesGrupo1 = 4; codewordsGrupo1 = 107; bloquesGrupo2 = 0; codewordsGrupo2 = 0;}
+                            else if(errorCorrection == 15) {bitsNecesarios = 334; bloquesCorreccion = 22;
+                                bloquesGrupo1 = 8; codewordsGrupo1 = 37; bloquesGrupo2 = 1; codewordsGrupo2 = 38;}
+                            else if(errorCorrection == 25) {bitsNecesarios = 244; bloquesCorreccion = 24;
+                                bloquesGrupo1 = 8; codewordsGrupo1 = 20; bloquesGrupo2 = 4; codewordsGrupo2 = 21;}
+                            else if(errorCorrection == 30) {bitsNecesarios = 180; bloquesCorreccion = 22;
+                                bloquesGrupo1 = 12; codewordsGrupo1 = 11; bloquesGrupo2 = 4; codewordsGrupo2 = 12;}
                             break;
                         case 14:
-                            if(errorCorrection == 7) {bitsNecesarios = 461; bloquesCorreccion = 30;}
-                            else if(errorCorrection == 15) {bitsNecesarios = 365; bloquesCorreccion = 24;}
-                            else if(errorCorrection == 25) {bitsNecesarios = 261; bloquesCorreccion = 20;}
-                            else if(errorCorrection == 30) {bitsNecesarios = 197; bloquesCorreccion = 24;}
+                            if(errorCorrection == 7) {bitsNecesarios = 461; bloquesCorreccion = 30;
+                                bloquesGrupo1 = 3; codewordsGrupo1 = 115; bloquesGrupo2 = 1; codewordsGrupo2 = 116;}
+                            else if(errorCorrection == 15) {bitsNecesarios = 365; bloquesCorreccion = 24;
+                                bloquesGrupo1 = 4; codewordsGrupo1 = 40; bloquesGrupo2 = 5; codewordsGrupo2 = 41;}
+                            else if(errorCorrection == 25) {bitsNecesarios = 261; bloquesCorreccion = 20;
+                                bloquesGrupo1 = 11; codewordsGrupo1 = 16; bloquesGrupo2 = 5; codewordsGrupo2 = 17;}
+                            else if(errorCorrection == 30) {bitsNecesarios = 197; bloquesCorreccion = 24;
+                                bloquesGrupo1 = 11; codewordsGrupo1 = 12; bloquesGrupo2 = 5; codewordsGrupo2 = 13;}
                             break;
                         case 15:
-                            if(errorCorrection == 7) {bitsNecesarios = 523; bloquesCorreccion = 22;}
-                            else if(errorCorrection == 15) {bitsNecesarios = 415; bloquesCorreccion = 24;}
-                            else if(errorCorrection == 25) {bitsNecesarios = 295; bloquesCorreccion = 30;}
-                            else if(errorCorrection == 30) {bitsNecesarios = 223; bloquesCorreccion = 24;}
+                            if(errorCorrection == 7) {bitsNecesarios = 523; bloquesCorreccion = 22;
+                                bloquesGrupo1 = 5; codewordsGrupo1 = 87; bloquesGrupo2 = 1; codewordsGrupo2 = 88;}
+                            else if(errorCorrection == 15) {bitsNecesarios = 415; bloquesCorreccion = 24;
+                                bloquesGrupo1 = 5; codewordsGrupo1 = 41; bloquesGrupo2 = 5; codewordsGrupo2 = 42;}
+                            else if(errorCorrection == 25) {bitsNecesarios = 295; bloquesCorreccion = 30;
+                                bloquesGrupo1 = 5; codewordsGrupo1 = 24; bloquesGrupo2 = 7; codewordsGrupo2 = 25;}
+                            else if(errorCorrection == 30) {bitsNecesarios = 223; bloquesCorreccion = 24;
+                                bloquesGrupo1 = 11; codewordsGrupo1 = 12; bloquesGrupo2 = 7; codewordsGrupo2 = 13;}
                             break;
                         case 16:
-                            if(errorCorrection == 7) {bitsNecesarios = 589; bloquesCorreccion = 24;}
-                            else if(errorCorrection == 15) {bitsNecesarios = 453; bloquesCorreccion = 28;}
-                            else if(errorCorrection == 25) {bitsNecesarios = 325; bloquesCorreccion = 24;}
-                            else if(errorCorrection == 30) {bitsNecesarios = 253; bloquesCorreccion = 30;}
+                            if(errorCorrection == 7) {bitsNecesarios = 589; bloquesCorreccion = 24;
+                                bloquesGrupo1 = 5; codewordsGrupo1 = 98; bloquesGrupo2 = 1; codewordsGrupo2 = 99;}
+                            else if(errorCorrection == 15) {bitsNecesarios = 453; bloquesCorreccion = 28;
+                                bloquesGrupo1 = 7; codewordsGrupo1 = 45; bloquesGrupo2 = 3; codewordsGrupo2 = 46;}
+                            else if(errorCorrection == 25) {bitsNecesarios = 325; bloquesCorreccion = 24;
+                                bloquesGrupo1 = 15; codewordsGrupo1 = 19; bloquesGrupo2 = 2; codewordsGrupo2 = 20;}
+                            else if(errorCorrection == 30) {bitsNecesarios = 253; bloquesCorreccion = 30;
+                                bloquesGrupo1 = 3; codewordsGrupo1 = 15; bloquesGrupo2 = 13; codewordsGrupo2 = 16;}
                             break;
                         case 17:
-                            if(errorCorrection == 7) {bitsNecesarios = 647; bloquesCorreccion = 28;}
-                            else if(errorCorrection == 15) {bitsNecesarios = 507; bloquesCorreccion = 28;}
-                            else if(errorCorrection == 25) {bitsNecesarios = 367; bloquesCorreccion = 28;}
-                            else if(errorCorrection == 30) {bitsNecesarios = 283; bloquesCorreccion = 28;}
+                            if(errorCorrection == 7) {bitsNecesarios = 647; bloquesCorreccion = 28;
+                                bloquesGrupo1 = 1; codewordsGrupo1 = 107; bloquesGrupo2 = 5; codewordsGrupo2 = 108;}
+                            else if(errorCorrection == 15) {bitsNecesarios = 507; bloquesCorreccion = 28;
+                                bloquesGrupo1 = 10; codewordsGrupo1 = 46; bloquesGrupo2 = 1; codewordsGrupo2 = 47;}
+                            else if(errorCorrection == 25) {bitsNecesarios = 367; bloquesCorreccion = 28;
+                                bloquesGrupo1 = 1; codewordsGrupo1 = 22; bloquesGrupo2 = 15; codewordsGrupo2 = 23;}
+                            else if(errorCorrection == 30) {bitsNecesarios = 283; bloquesCorreccion = 28;
+                                bloquesGrupo1 = 2; codewordsGrupo1 = 14; bloquesGrupo2 = 17; codewordsGrupo2 = 15;}
                             break;
                         case 18:
-                            if(errorCorrection == 7) {bitsNecesarios = 721; bloquesCorreccion = 30;}
-                            else if(errorCorrection == 15) {bitsNecesarios = 563; bloquesCorreccion = 26;}
-                            else if(errorCorrection == 25) {bitsNecesarios = 397; bloquesCorreccion = 28;}
-                            else if(errorCorrection == 30) {bitsNecesarios = 313; bloquesCorreccion = 28;}
+                            if(errorCorrection == 7) {bitsNecesarios = 721; bloquesCorreccion = 30;
+                                bloquesGrupo1 = 5; codewordsGrupo1 = 120; bloquesGrupo2 = 1; codewordsGrupo2 = 121;}
+                            else if(errorCorrection == 15) {bitsNecesarios = 563; bloquesCorreccion = 26;
+                                bloquesGrupo1 = 9; codewordsGrupo1 = 43; bloquesGrupo2 = 4; codewordsGrupo2 = 44;}
+                            else if(errorCorrection == 25) {bitsNecesarios = 397; bloquesCorreccion = 28;
+                                bloquesGrupo1 = 17; codewordsGrupo1 = 22; bloquesGrupo2 = 1; codewordsGrupo2 = 23;}
+                            else if(errorCorrection == 30) {bitsNecesarios = 313; bloquesCorreccion = 28;
+                                bloquesGrupo1 = 2; codewordsGrupo1 = 14; bloquesGrupo2 = 19; codewordsGrupo2 = 15;}
                             break;
                         case 19:
-                            if(errorCorrection == 7) {bitsNecesarios = 795; bloquesCorreccion = 28;}
-                            else if(errorCorrection == 15) {bitsNecesarios = 627; bloquesCorreccion = 26;}
-                            else if(errorCorrection == 25) {bitsNecesarios = 445; bloquesCorreccion = 26;}
-                            else if(errorCorrection == 30) {bitsNecesarios = 341; bloquesCorreccion = 26;}
+                            if(errorCorrection == 7) {bitsNecesarios = 795; bloquesCorreccion = 28;
+                                bloquesGrupo1 = 3; codewordsGrupo1 = 113; bloquesGrupo2 = 4; codewordsGrupo2 = 114;}
+                            else if(errorCorrection == 15) {bitsNecesarios = 627; bloquesCorreccion = 26;
+                                bloquesGrupo1 = 3; codewordsGrupo1 = 44; bloquesGrupo2 = 11; codewordsGrupo2 = 45;}
+                            else if(errorCorrection == 25) {bitsNecesarios = 445; bloquesCorreccion = 26;
+                                bloquesGrupo1 = 17; codewordsGrupo1 = 21; bloquesGrupo2 = 4; codewordsGrupo2 = 22;}
+                            else if(errorCorrection == 30) {bitsNecesarios = 341; bloquesCorreccion = 26;
+                                bloquesGrupo1 = 9; codewordsGrupo1 = 13; bloquesGrupo2 = 16; codewordsGrupo2 = 14;}
                             break;
                         case 20:
-                            if(errorCorrection == 7) {bitsNecesarios = 861; bloquesCorreccion = 28;}
-                            else if(errorCorrection == 15) {bitsNecesarios = 669; bloquesCorreccion = 26;}
-                            else if(errorCorrection == 25) {bitsNecesarios = 485; bloquesCorreccion = 30;}
-                            else if(errorCorrection == 30) {bitsNecesarios = 385; bloquesCorreccion = 28;}
+                            if(errorCorrection == 7) {bitsNecesarios = 861; bloquesCorreccion = 28;
+                                bloquesGrupo1 = 3; codewordsGrupo1 = 107; bloquesGrupo2 = 5; codewordsGrupo2 = 108;}
+                            else if(errorCorrection == 15) {bitsNecesarios = 669; bloquesCorreccion = 26;
+                                bloquesGrupo1 = 3; codewordsGrupo1 = 41; bloquesGrupo2 = 13; codewordsGrupo2 = 42;}
+                            else if(errorCorrection == 25) {bitsNecesarios = 485; bloquesCorreccion = 30;
+                                bloquesGrupo1 = 15; codewordsGrupo1 = 24; bloquesGrupo2 = 5; codewordsGrupo2 = 25;}
+                            else if(errorCorrection == 30) {bitsNecesarios = 385; bloquesCorreccion = 28;
+                                bloquesGrupo1 = 15; codewordsGrupo1 = 15; bloquesGrupo2 = 10; codewordsGrupo2 = 16;}
                             break;
                     }
                     bitsNecesarios *= 8;
@@ -569,27 +649,53 @@ public class MainActivity extends AppCompatActivity {
                     textViewBinario.setText(cifrado);
 
                     //Preparar el mensaje polinomial, el numero es el coeficiente y el indice es el exponente de x
-                    int[] polinomio = new int[bitsNecesarios/8]; //Dividir la cadena en bloques de 8 y convertir a decimal
-                    int reversa = polinomio.length - 1;
-                    for(int i = 0; i < cifrado.length(); i += 8)
+                    //Seaparados en grupos, separados en bloques, separados en data codewords
+                    int[][] grupo1 = new int[bloquesGrupo1][codewordsGrupo1], grupo2 = new int[bloquesGrupo2][codewordsGrupo2];
+                    int[][] residuoGrupo1 = new int[bloquesGrupo1][codewordsGrupo1], residuoGrupo2 = new int[bloquesGrupo2][codewordsGrupo2];
+                    int contBits = 0;
+                    for(int i = 0; i < grupo1.length; i++) //Grupo1
                     {
-                        polinomio[reversa] = Integer.parseInt(cifrado.substring(i, i+8),2);
-                        reversa--;
-                    } //A los indices hay que sumarles la variable bloquesCorreccion para usarlos
+                        int reversa = grupo1[i].length - 1;
+                        for(int j = 0; j < grupo1[i].length; j++) //Bloques del Grupo1, mensajes polinomiales
+                        {
+                            grupo1[i][reversa] = Integer.parseInt(cifrado.substring(contBits, contBits+8), 2);
+                            residuoGrupo1[i][reversa] = Integer.parseInt(cifrado.substring(contBits, contBits+8), 2);
+                            contBits += 8;
+                            reversa--;
+                        }
+                        //Bloques del Grupo1, residuos - Error correction codewords
+                        //XOR el generador polinomial con el mensaje polinomial
+                        for(int j = 0; j < grupo1[i].length; j++) residuoGrupo1[i] = XORprocedimiento(residuoGrupo1[i]);
+                    }
+                    for(int i = 0; i < grupo2.length; i++) //Grupo2
+                    {
+                        int reversa = grupo2[i].length - 1;
+                        for(int j = 0; j < grupo2[i].length; j++) //Bloques del Grupo1, mensajes polinomiales
+                        {
+                            residuoGrupo2[i][reversa] = Integer.parseInt(cifrado.substring(contBits, contBits+8), 2);
+                            grupo2[i][reversa] = Integer.parseInt(cifrado.substring(contBits, contBits+8), 2);
+                            contBits += 8;
+                            reversa--;
+                        }
+                        //Bloques del Grupo1, residuos - Error correction codewords
+                        //XOR el generador polinomial con el mensaje polinomial
+                        for(int j = 0; j < grupo2[i].length; j++) residuoGrupo2[i] = XORprocedimiento(residuoGrupo2[i]);
+                    }
+                    //A los indices hay que sumarles la variable bloquesCorreccion para usarlos
+                    //Primero poner el residuo y luego el polinomio porque estan invertidos los arreglos
 
                     //Calcular por cuanto se debe multiplicar el generador polinomial para que el primer elemento (ultimo en el arreglo)
                     //tenga el mismo exponente de x que el primer elemento (ultimo en el arreglo) del polinomio
                     //A los indices hay que sumarles esta variable para usarlos
                     //int sumarGenPolinomial = polinomio.length-1 + bloquesCorreccion - genPolinomial.length-1;
 
-                    int numPasosDivision = polinomio.length; //XOR el generador polinomial con el mensaje polinomial
-                    for(int i = 0; i < numPasosDivision; i++) polinomio = XORprocedimiento(polinomio);
+                    //Intercalar los data codewords y los error correction codewords
+                    int[] polinomio = IntercalarCodewords(grupo1, grupo2, bloquesGrupo1*codewordsGrupo1 + bloquesGrupo2*codewordsGrupo2);
+                    int[] residuo = IntercalarCodewords(residuoGrupo1, residuoGrupo2, bloquesCorreccion*bloquesGrupo1 + bloquesCorreccion*bloquesGrupo2);
 
                     String aux = "";
-                    for(int i = 0; i < polinomio.length; i++) aux += polinomio[i] + " ";
+                    for(int i = 0; i < residuo.length; i++) aux += residuo[i] + " ";
                     textViewBinario.setText(aux);
-
-                    int[] residuio = new int[bloquesCorreccion];
                 }
             }
         });
@@ -745,4 +851,33 @@ public class MainActivity extends AppCompatActivity {
             return Arrays.copyOf(genPolinomial, genPolinomial.length-1);
         }
     }
+
+    public int[] IntercalarCodewords(int[][] grupo1, int[][] grupo2, int tamanioPoli)
+    {
+        int[] polinomio = new int[tamanioPoli];
+        int longPoli = 0, long1 = 0, long2 = 0;
+        while(longPoli < polinomio.length)
+        {
+            if(long1 < codewordsGrupo1)
+            {
+                for(int i = 0; i < grupo1.length; i++)
+                {
+                    polinomio[longPoli] = grupo1[i][long1];
+                    longPoli++;
+                    long1++;
+                }
+            }
+            if(long2 < codewordsGrupo2)
+            {
+                for(int i = 0; i < grupo2.length; i++)
+                {
+                    polinomio[longPoli] = grupo2[i][long2];
+                    longPoli++;
+                    long2++;
+                }
+            }
+        }
+        return polinomio;
+    }
 }
+
