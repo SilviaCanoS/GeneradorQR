@@ -22,7 +22,8 @@ public class MainActivity extends AppCompatActivity {
     RadioGroup radioGroup;
     RadioButton radioL7, radioM15, radioQ25, radioH30;
 
-    int errorCorrection = 7, version, tamanio, tamanioIndicador, bitsNecesarios, bloquesCorreccion, bloquesGrupo1, codewordsGrupo1, bloquesGrupo2, codewordsGrupo2;
+    int errorCorrection = 7, version, tamanio, tamanioIndicador, bitsNecesarios, bloquesCorreccion, bloquesGrupo1,
+            codewordsGrupo1, bloquesGrupo2, codewordsGrupo2, bitsExtra;
     String cifrado;
 
     @Override
@@ -431,6 +432,7 @@ public class MainActivity extends AppCompatActivity {
                     switch (version) //Determinar el numero de bits necesarias y el numero de bloques de correccion necesarios
                     {
                         case 1:
+                            bitsExtra = 0;
                             if(errorCorrection == 7) {bitsNecesarios = 19; bloquesCorreccion = 7;
                                 bloquesGrupo1 = 1; codewordsGrupo1 = 19; bloquesGrupo2 = 0; codewordsGrupo2 = 0;}
                             else if(errorCorrection == 15) {bitsNecesarios = 16; bloquesCorreccion = 10;
@@ -441,6 +443,7 @@ public class MainActivity extends AppCompatActivity {
                                 bloquesGrupo1 = 1; codewordsGrupo1 = 9; bloquesGrupo2 = 0; codewordsGrupo2 = 0;}
                             break;
                         case 2:
+                            bitsExtra = 7;
                             if(errorCorrection == 7) {bitsNecesarios = 34; bloquesCorreccion = 10;
                                 bloquesGrupo1 = 1; codewordsGrupo1 = 34; bloquesGrupo2 = 0; codewordsGrupo2 = 0;}
                             else if(errorCorrection == 15) {bitsNecesarios = 28; bloquesCorreccion = 16;
@@ -451,6 +454,7 @@ public class MainActivity extends AppCompatActivity {
                                 bloquesGrupo1 = 1; codewordsGrupo1 = 16; bloquesGrupo2 = 0; codewordsGrupo2 = 0;}
                             break;
                         case 3:
+                            bitsExtra = 7;
                             if(errorCorrection == 7) {bitsNecesarios = 55; bloquesCorreccion = 15;
                                 bloquesGrupo1 = 1; codewordsGrupo1 = 55; bloquesGrupo2 = 0; codewordsGrupo2 = 0;}
                             else if(errorCorrection == 15) {bitsNecesarios = 44; bloquesCorreccion = 26;
@@ -461,6 +465,7 @@ public class MainActivity extends AppCompatActivity {
                                 bloquesGrupo1 = 2; codewordsGrupo1 = 13; bloquesGrupo2 = 0; codewordsGrupo2 = 0;}
                             break;
                         case 4:
+                            bitsExtra = 7;
                             if(errorCorrection == 7) {bitsNecesarios = 80; bloquesCorreccion = 20;
                                 bloquesGrupo1 = 1; codewordsGrupo1 = 80; bloquesGrupo2 = 0; codewordsGrupo2 = 0;}
                             else if(errorCorrection == 15) {bitsNecesarios = 64; bloquesCorreccion = 18;
@@ -470,6 +475,7 @@ public class MainActivity extends AppCompatActivity {
                             else if(errorCorrection == 30) {bitsNecesarios = 36; bloquesCorreccion = 16;
                                 bloquesGrupo1 = 4; codewordsGrupo1 = 9; bloquesGrupo2 = 0; codewordsGrupo2 = 0;}
                         case 5:
+                            bitsExtra = 7;
                             if(errorCorrection == 7) {bitsNecesarios = 108; bloquesCorreccion = 26;
                                 bloquesGrupo1 = 1; codewordsGrupo1 = 108; bloquesGrupo2 = 0; codewordsGrupo2 = 0;}
                             else if(errorCorrection == 15) {bitsNecesarios = 86; bloquesCorreccion = 24;
@@ -480,6 +486,7 @@ public class MainActivity extends AppCompatActivity {
                                 bloquesGrupo1 = 2; codewordsGrupo1 = 11; bloquesGrupo2 = 2; codewordsGrupo2 = 12;}
                             break;
                         case 6:
+                            bitsExtra = 7;
                             if(errorCorrection == 7) {bitsNecesarios = 136; bloquesCorreccion = 18;
                                 bloquesGrupo1 = 2; codewordsGrupo1 = 68; bloquesGrupo2 = 0; codewordsGrupo2 = 0;}
                             else if(errorCorrection == 15) {bitsNecesarios = 108; bloquesCorreccion = 16;
@@ -490,6 +497,7 @@ public class MainActivity extends AppCompatActivity {
                                 bloquesGrupo1 = 4; codewordsGrupo1 = 15; bloquesGrupo2 = 0; codewordsGrupo2 = 0;}
                             break;
                         case 7:
+                            bitsExtra = 0;
                             if(errorCorrection == 7) {bitsNecesarios = 156; bloquesCorreccion = 20;
                                 bloquesGrupo1 = 2; codewordsGrupo1 = 78; bloquesGrupo2 = 0; codewordsGrupo2 = 0;}
                             else if(errorCorrection == 15) {bitsNecesarios = 124; bloquesCorreccion = 18;
@@ -500,6 +508,7 @@ public class MainActivity extends AppCompatActivity {
                                 bloquesGrupo1 = 4; codewordsGrupo1 = 13; bloquesGrupo2 = 1; codewordsGrupo2 = 14;}
                             break;
                         case 8:
+                            bitsExtra = 0;
                             if(errorCorrection == 7) {bitsNecesarios = 194; bloquesCorreccion = 24;
                                 bloquesGrupo1 = 2; codewordsGrupo1 = 97; bloquesGrupo2 = 0; codewordsGrupo2 = 0;}
                             else if(errorCorrection == 15) {bitsNecesarios = 154; bloquesCorreccion = 22;
@@ -510,6 +519,7 @@ public class MainActivity extends AppCompatActivity {
                                 bloquesGrupo1 = 4; codewordsGrupo1 = 14; bloquesGrupo2 = 2; codewordsGrupo2 = 15;}
                             break;
                         case 9:
+                            bitsExtra = 0;
                             if(errorCorrection == 7) {bitsNecesarios = 232; bloquesCorreccion = 30;
                                 bloquesGrupo1 = 2; codewordsGrupo1 = 116; bloquesGrupo2 = 0; codewordsGrupo2 = 0;}
                             else if(errorCorrection == 15) {bitsNecesarios = 182; bloquesCorreccion = 22;
@@ -520,6 +530,7 @@ public class MainActivity extends AppCompatActivity {
                                 bloquesGrupo1 = 4; codewordsGrupo1 = 12; bloquesGrupo2 = 4; codewordsGrupo2 = 13;}
                             break;
                         case 10:
+                            bitsExtra = 0;
                             if(errorCorrection == 7) {bitsNecesarios = 274; bloquesCorreccion = 18;
                                 bloquesGrupo1 = 2; codewordsGrupo1 = 68; bloquesGrupo2 = 2; codewordsGrupo2 = 69;}
                             else if(errorCorrection == 15) {bitsNecesarios = 216; bloquesCorreccion = 26;
@@ -530,6 +541,7 @@ public class MainActivity extends AppCompatActivity {
                                 bloquesGrupo1 = 6; codewordsGrupo1 = 15; bloquesGrupo2 = 2; codewordsGrupo2 = 16;}
                             break;
                         case 11:
+                            bitsExtra = 0;
                             if(errorCorrection == 7) {bitsNecesarios = 324; bloquesCorreccion = 20;
                                 bloquesGrupo1 = 4; codewordsGrupo1 = 81; bloquesGrupo2 = 0; codewordsGrupo2 = 0;}
                             else if(errorCorrection == 15) {bitsNecesarios = 254; bloquesCorreccion = 30;
@@ -540,6 +552,7 @@ public class MainActivity extends AppCompatActivity {
                                 bloquesGrupo1 = 3; codewordsGrupo1 = 12; bloquesGrupo2 = 8; codewordsGrupo2 = 13;}
                             break;
                         case 12:
+                            bitsExtra = 0;
                             if(errorCorrection == 7) {bitsNecesarios = 370; bloquesCorreccion = 24;
                                 bloquesGrupo1 = 2; codewordsGrupo1 = 92; bloquesGrupo2 = 2; codewordsGrupo2 = 93;}
                             else if(errorCorrection == 15) {bitsNecesarios = 290; bloquesCorreccion = 22;
@@ -550,6 +563,7 @@ public class MainActivity extends AppCompatActivity {
                                 bloquesGrupo1 = 7; codewordsGrupo1 = 14; bloquesGrupo2 = 4; codewordsGrupo2 = 15;}
                             break;
                         case 13:
+                            bitsExtra = 0;
                             if(errorCorrection == 7) {bitsNecesarios = 428; bloquesCorreccion = 26;
                                 bloquesGrupo1 = 4; codewordsGrupo1 = 107; bloquesGrupo2 = 0; codewordsGrupo2 = 0;}
                             else if(errorCorrection == 15) {bitsNecesarios = 334; bloquesCorreccion = 22;
@@ -560,6 +574,7 @@ public class MainActivity extends AppCompatActivity {
                                 bloquesGrupo1 = 12; codewordsGrupo1 = 11; bloquesGrupo2 = 4; codewordsGrupo2 = 12;}
                             break;
                         case 14:
+                            bitsExtra = 3;
                             if(errorCorrection == 7) {bitsNecesarios = 461; bloquesCorreccion = 30;
                                 bloquesGrupo1 = 3; codewordsGrupo1 = 115; bloquesGrupo2 = 1; codewordsGrupo2 = 116;}
                             else if(errorCorrection == 15) {bitsNecesarios = 365; bloquesCorreccion = 24;
@@ -570,6 +585,7 @@ public class MainActivity extends AppCompatActivity {
                                 bloquesGrupo1 = 11; codewordsGrupo1 = 12; bloquesGrupo2 = 5; codewordsGrupo2 = 13;}
                             break;
                         case 15:
+                            bitsExtra = 3;
                             if(errorCorrection == 7) {bitsNecesarios = 523; bloquesCorreccion = 22;
                                 bloquesGrupo1 = 5; codewordsGrupo1 = 87; bloquesGrupo2 = 1; codewordsGrupo2 = 88;}
                             else if(errorCorrection == 15) {bitsNecesarios = 415; bloquesCorreccion = 24;
@@ -580,6 +596,7 @@ public class MainActivity extends AppCompatActivity {
                                 bloquesGrupo1 = 11; codewordsGrupo1 = 12; bloquesGrupo2 = 7; codewordsGrupo2 = 13;}
                             break;
                         case 16:
+                            bitsExtra = 3;
                             if(errorCorrection == 7) {bitsNecesarios = 589; bloquesCorreccion = 24;
                                 bloquesGrupo1 = 5; codewordsGrupo1 = 98; bloquesGrupo2 = 1; codewordsGrupo2 = 99;}
                             else if(errorCorrection == 15) {bitsNecesarios = 453; bloquesCorreccion = 28;
@@ -590,6 +607,7 @@ public class MainActivity extends AppCompatActivity {
                                 bloquesGrupo1 = 3; codewordsGrupo1 = 15; bloquesGrupo2 = 13; codewordsGrupo2 = 16;}
                             break;
                         case 17:
+                            bitsExtra = 3;
                             if(errorCorrection == 7) {bitsNecesarios = 647; bloquesCorreccion = 28;
                                 bloquesGrupo1 = 1; codewordsGrupo1 = 107; bloquesGrupo2 = 5; codewordsGrupo2 = 108;}
                             else if(errorCorrection == 15) {bitsNecesarios = 507; bloquesCorreccion = 28;
@@ -600,6 +618,7 @@ public class MainActivity extends AppCompatActivity {
                                 bloquesGrupo1 = 2; codewordsGrupo1 = 14; bloquesGrupo2 = 17; codewordsGrupo2 = 15;}
                             break;
                         case 18:
+                            bitsExtra = 3;
                             if(errorCorrection == 7) {bitsNecesarios = 721; bloquesCorreccion = 30;
                                 bloquesGrupo1 = 5; codewordsGrupo1 = 120; bloquesGrupo2 = 1; codewordsGrupo2 = 121;}
                             else if(errorCorrection == 15) {bitsNecesarios = 563; bloquesCorreccion = 26;
@@ -610,6 +629,7 @@ public class MainActivity extends AppCompatActivity {
                                 bloquesGrupo1 = 2; codewordsGrupo1 = 14; bloquesGrupo2 = 19; codewordsGrupo2 = 15;}
                             break;
                         case 19:
+                            bitsExtra = 3;
                             if(errorCorrection == 7) {bitsNecesarios = 795; bloquesCorreccion = 28;
                                 bloquesGrupo1 = 3; codewordsGrupo1 = 113; bloquesGrupo2 = 4; codewordsGrupo2 = 114;}
                             else if(errorCorrection == 15) {bitsNecesarios = 627; bloquesCorreccion = 26;
@@ -620,6 +640,7 @@ public class MainActivity extends AppCompatActivity {
                                 bloquesGrupo1 = 9; codewordsGrupo1 = 13; bloquesGrupo2 = 16; codewordsGrupo2 = 14;}
                             break;
                         case 20:
+                            bitsExtra = 3;
                             if(errorCorrection == 7) {bitsNecesarios = 861; bloquesCorreccion = 28;
                                 bloquesGrupo1 = 3; codewordsGrupo1 = 107; bloquesGrupo2 = 5; codewordsGrupo2 = 108;}
                             else if(errorCorrection == 15) {bitsNecesarios = 669; bloquesCorreccion = 26;
@@ -631,8 +652,7 @@ public class MainActivity extends AppCompatActivity {
                             break;
                     }
                     bitsNecesarios *= 8;
-                    textViewVersion.setText("Versión: " + version + " - Tamaño: " + tamanio + "x" + tamanio
-                            + " - Bits: " + bitsNecesarios);
+                    textViewVersion.setText("Versión: " + version + " - Tamaño: " + tamanio + "x" + tamanio);
 
                     if(bitsNecesarios - cifrado.length() == 1) cifrado += "0"; //Agregar el terminador
                     else if(bitsNecesarios - cifrado.length() == 2) cifrado += "00";
@@ -646,38 +666,31 @@ public class MainActivity extends AppCompatActivity {
                         cifrado += "11101100";
                         if(cifrado.length() < bitsNecesarios) cifrado += "00010001";
                     }
-                    textViewBinario.setText(cifrado);
 
-                    //Preparar el mensaje polinomial, el numero es el coeficiente y el indice es el exponente de x
+                    //Preparar el mensaje polinomial, el numero es el coeficiente
                     //Seaparados en grupos, separados en bloques, separados en data codewords
                     int[][] grupo1 = new int[bloquesGrupo1][codewordsGrupo1], grupo2 = new int[bloquesGrupo2][codewordsGrupo2];
                     int[][] residuoGrupo1 = new int[bloquesGrupo1][codewordsGrupo1], residuoGrupo2 = new int[bloquesGrupo2][codewordsGrupo2];
                     int contBits = 0;
                     for(int i = 0; i < grupo1.length; i++) //Grupo1
                     {
-                        int reversa = grupo1[i].length - 1;
                         for(int j = 0; j < grupo1[i].length; j++) //Bloques del Grupo1, mensajes polinomiales
                         {
-                            grupo1[i][reversa] = Integer.parseInt(cifrado.substring(contBits, contBits+8), 2);
-                            residuoGrupo1[i][reversa] = Integer.parseInt(cifrado.substring(contBits, contBits+8), 2);
+                            grupo1[i][j] = Integer.parseInt(cifrado.substring(contBits, contBits+8), 2); //Data codewords
+                            residuoGrupo1[i][j] = Integer.parseInt(cifrado.substring(contBits, contBits+8), 2); //Error correction codewords
                             contBits += 8;
-                            reversa--;
                         }
-                        //Bloques del Grupo1, residuos - Error correction codewords
                         //XOR el generador polinomial con el mensaje polinomial
                         for(int j = 0; j < grupo1[i].length; j++) residuoGrupo1[i] = XORprocedimiento(residuoGrupo1[i]);
                     }
                     for(int i = 0; i < grupo2.length; i++) //Grupo2
                     {
-                        int reversa = grupo2[i].length - 1;
                         for(int j = 0; j < grupo2[i].length; j++) //Bloques del Grupo1, mensajes polinomiales
                         {
-                            residuoGrupo2[i][reversa] = Integer.parseInt(cifrado.substring(contBits, contBits+8), 2);
-                            grupo2[i][reversa] = Integer.parseInt(cifrado.substring(contBits, contBits+8), 2);
+                            residuoGrupo2[i][j] = Integer.parseInt(cifrado.substring(contBits, contBits+8), 2); //Data codewords
+                            grupo2[i][j] = Integer.parseInt(cifrado.substring(contBits, contBits+8), 2); //Error correction codewords
                             contBits += 8;
-                            reversa--;
                         }
-                        //Bloques del Grupo1, residuos - Error correction codewords
                         //XOR el generador polinomial con el mensaje polinomial
                         for(int j = 0; j < grupo2[i].length; j++) residuoGrupo2[i] = XORprocedimiento(residuoGrupo2[i]);
                     }
@@ -693,9 +706,28 @@ public class MainActivity extends AppCompatActivity {
                     int[] polinomio = IntercalarCodewords(grupo1, grupo2, bloquesGrupo1*codewordsGrupo1 + bloquesGrupo2*codewordsGrupo2);
                     int[] residuo = IntercalarCodewords(residuoGrupo1, residuoGrupo2, bloquesCorreccion*bloquesGrupo1 + bloquesCorreccion*bloquesGrupo2);
 
+                    //Concatenar los arreglos, primero los data codewords y luego los error correction codewords
+                    String finalMessage = "";
+                    for(int i = 0; i < polinomio.length; i++)
+                    {
+                        String auxString = Integer.toBinaryString(polinomio[i]); //Convertir a binario de 8 bits
+                        for(int j = auxString.length(); j < 8; j++) auxString = "0" + auxString; //Agregar los 0 necesarios
+                        finalMessage += auxString;
+                    }
+                    for(int i = polinomio.length; i < polinomio.length+residuo.length; i++)
+                    {
+                        String auxString = Integer.toBinaryString(residuo[i-polinomio.length]); //Convertir a binario de 8 bits
+                        for(int j = auxString.length(); j < 8; j++) auxString = "0" + auxString; //Agregar los 0 necesarios
+                        finalMessage += auxString;
+                    }
+
+                    //Añadir los bits extra necesarios segun la version
+                    for(int i = 0; i < bitsExtra; i++) finalMessage += "0";
+
                     String aux = "";
-                    for(int i = 0; i < residuo.length; i++) aux += residuo[i] + " ";
-                    textViewBinario.setText(aux);
+                    //for(int i = 0; i < finalMessage.length; i++) aux += finalMessage[i] + " ";
+                    textViewBinario.setText(finalMessage);
+
                 }
             }
         });
@@ -789,33 +821,33 @@ public class MainActivity extends AppCompatActivity {
     {
         switch (bloques)
         {
-            case 7: return new int[]{21, 102, 238, 149, 146, 229, 87, 0};
-            case 10: return new int[]{45, 32, 94, 64, 70, 118, 61, 46, 67, 251, 0};
-            case 13: return new int[]{78, 140, 206, 218, 130, 104, 106, 100, 86, 100, 176, 152, 74, 0};
-            case 15: return new int[]{105, 99, 5, 124, 140, 237, 58, 58, 51, 37, 202, 91, 61, 183, 8, 0};
-            case 16: return new int[]{120, 225, 194, 182, 169, 147, 191, 91, 3, 76, 161, 102, 109, 107, 104, 120, 0};
-            case 17: return new int[]{136, 163, 243, 39, 150, 99, 24, 147, 214, 206, 123, 239, 43, 78, 206, 139, 43, 0};
-            case 18: return new int[]{153, 96, 98, 5, 179, 252, 148, 152, 187, 79, 170, 118, 97, 184, 94, 158, 234, 215, 0};
-            case 20: return new int[]{190, 188, 212, 212, 164, 156, 239, 83, 225, 221, 180, 202, 187, 26, 163, 61, 50, 79, 60, 17, 0};
-            case 22: return new int[]{231, 165, 105, 160, 134, 219, 80, 98, 172, 8, 74, 200, 53, 221, 109, 14, 230, 93, 242, 247, 171, 210, 0};
-            case 24: return new int[]{21, 227, 96, 87, 232, 117, 0, 111, 218, 228, 226, 192, 152, 169, 180, 159, 126, 251, 117, 211, 48, 135, 121, 229, 0};
-            case 26: return new int[]{70, 218, 145, 153, 227, 48, 102, 13, 142, 245, 21, 161, 53, 165,
-                    28, 111, 201, 145, 17, 118, 182, 103, 2, 158, 125, 173, 0};
-            case 28: return new int[]{123, 9, 37, 242, 119, 212, 195, 42, 87, 245, 43, 21, 201, 232, 27,
-                    205, 147, 195, 190, 110, 180, 108, 234, 224, 104, 200, 223, 168, 0};
-            case 30: return new int[]{180, 192, 40, 238, 216, 251, 37, 156, 130, 224, 193, 226, 173, 42,
-                    125, 222, 96, 239, 86, 110, 48, 50, 182, 179, 31, 216, 152, 145, 173, 41, 0};
+            case 7: return new int[]{0, 87, 229, 146, 149, 238, 102, 21};
+            case 10: return new int[]{0, 251, 67, 46, 61, 118, 70, 64, 94, 32, 45};
+            case 13: return new int[]{0, 74, 152, 176, 100, 86, 100, 106, 104, 130, 218, 206, 140, 78};
+            case 15: return new int[]{0, 8, 183, 61, 91, 202, 37, 51, 58, 58, 237, 140, 124, 5, 99, 105};
+            case 16: return new int[]{0, 120, 104, 107, 109, 102, 161, 76, 3, 91, 191, 147, 169, 182, 194, 225, 120};
+            case 17: return new int[]{0, 43, 139, 206, 78, 43, 239, 123, 206, 214, 147, 24, 99, 150, 39, 243, 163, 136};
+            case 18: return new int[]{0, 215, 234, 158, 94, 184, 97, 118, 170, 79, 187, 152, 148, 252, 179, 5, 98, 96, 153};
+            case 20: return new int[]{0, 17, 60, 79, 50, 61, 163, 26, 187, 202, 180, 221, 225, 83, 239, 156, 164, 212, 212, 188, 190};
+            case 22: return new int[]{0, 210, 171, 247, 242, 93, 230, 14, 109, 221, 53, 200, 74, 8, 172, 98, 80, 219, 134, 160, 105, 165, 231};
+            case 24: return new int[]{0, 229, 121, 135, 48, 211, 117, 251, 126, 159, 180, 169, 152, 192, 226, 228, 218, 111, 0, 117, 232, 87, 96, 227, 21};
+            case 26: return new int[]{0, 173, 125, 158, 2, 103, 182, 118, 17, 145, 201, 111, 28, 165,
+                    53, 161, 21, 245, 142, 13, 102, 48, 227, 153, 145, 218, 70};
+            case 28: return new int[]{0, 168, 223, 200, 104, 224, 234, 108, 180, 110, 190, 195, 147, 205,
+                    27, 232, 201, 21, 43, 245, 87, 42, 195, 212, 119, 242, 37, 9,123};
+            case 30: return new int[]{0, 41, 173, 145, 152, 216, 31, 179, 182, 50, 48, 110, 86, 239, 96,
+                    222, 125, 42, 173, 226, 193, 224, 130, 156, 37, 251, 216, 238, 40, 192, 180};
             default: return new int[0];
         }
     }
 
     public int[] XORprocedimiento(int[] polinomio)
     {
-        //Definir el generador polinomial, el numero es el exponente de 2 y el indice es el exponente de x
+        //Definir el generador polinomial, el numero es el exponente de 2
         int[] genPolinomial = DefinirGeneradorPolinomial(bloquesCorreccion);
 
         //Convertir el primer elemento del mensaje polinomial a la notación alfa - log
-        int alfaPolinomio = TablaLog(polinomio[polinomio.length-1]);
+        int alfaPolinomio = TablaLog(polinomio[0]);
 
         //Multiplicar el generador polinomial por el primer elemento del mensaje polinomial en su notacion alfa
         for(int i = 0; i < genPolinomial.length; i++)
@@ -827,28 +859,16 @@ public class MainActivity extends AppCompatActivity {
         }
 
         if(polinomio.length > genPolinomial.length)  //Si el generador polinomial es mas chico que el mensaje polinomial
-        {
-            int longPolinomio = polinomio.length - 1; //XOR el generador polinomial con el mensaje polinomial
-            for(int i = genPolinomial.length-1; i >= 0; i--)
-            {
-                polinomio[longPolinomio] = genPolinomial[i] ^ polinomio[longPolinomio];
-                longPolinomio--;
-            } //XOR el restante del mensaje polinomial con 0
-            for(int i = 0; i < polinomio.length-genPolinomial.length; i++) polinomio[i] = polinomio[i] ^ 0;
-            return Arrays.copyOf(polinomio, polinomio.length-1);
+        {//XOR el generador polinomial con el mensaje polinomial y con 0 para lo que falte
+            for(int i = 0; i < genPolinomial.length; i++) polinomio[i] = genPolinomial[i] ^ polinomio[i];
+            for(int i = genPolinomial.length; i < polinomio.length; i++) polinomio[i] = polinomio[i] ^ 0;
+            return Arrays.copyOfRange(polinomio, 1, polinomio.length); //Eliminar el primer elemento del mensaje polinomial, que resulta en 0
         }
         else
-        {
-            int longPolinomio = genPolinomial.length - 1; //XOR el generador polinomial con el mensaje polinomial
-            for(int i = polinomio.length-1; i >= 0; i--)
-            {
-                genPolinomial[longPolinomio] = polinomio[i] ^ genPolinomial[longPolinomio];
-                longPolinomio--;
-            }
-            for(int i = 0; i < genPolinomial.length-polinomio.length; i++) genPolinomial[i] = genPolinomial[i] ^ 0;
-
-            //Eliminar el primer elemento del mensaje polinomial, que resulta en 0
-            return Arrays.copyOf(genPolinomial, genPolinomial.length-1);
+        {//XOR el generador polinomial con el mensaje polinomial y con 0 para lo que falte
+            for(int i = 0; i < polinomio.length; i++) genPolinomial[i] = polinomio[i] ^ genPolinomial[i];
+            for(int i = polinomio.length; i < genPolinomial.length; i++) genPolinomial[i] = genPolinomial[i] ^ 0;
+            return Arrays.copyOfRange(genPolinomial, 1, genPolinomial.length); //Eliminar el primer elemento del mensaje polinomial, que resulta en 0
         }
     }
 
