@@ -2,12 +2,16 @@ package com.example.generadorqr_00;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.TableLayout;
+import android.widget.TableRow;
 import android.widget.TextView;
 
 import java.lang.reflect.Array;
@@ -21,9 +25,11 @@ public class MainActivity extends AppCompatActivity {
     TextView textViewVersion, textViewBinario;
     RadioGroup radioGroup;
     RadioButton radioL7, radioM15, radioQ25, radioH30;
+    TableLayout tabla;
 
     int errorCorrection = 7, version, tamanio, tamanioIndicador, bitsNecesarios, bloquesCorreccion, bloquesGrupo1,
             codewordsGrupo1, bloquesGrupo2, codewordsGrupo2, bitsExtra;
+    int[] alignmentPattern;
     String cifrado;
 
     @Override
@@ -34,12 +40,13 @@ public class MainActivity extends AppCompatActivity {
         editText = findViewById(R.id.editText);
         button = findViewById(R.id.button);
         textViewVersion = findViewById(R.id.textViewVersion);
-        textViewBinario = findViewById(R.id.textViewBinario);
+        //textViewBinario = findViewById(R.id.textViewBinario);
         radioGroup = findViewById(R.id.radioGroup);
         radioL7 = findViewById(R.id.radioL7);
         radioM15 = findViewById(R.id.radioM15);
         radioQ25 = findViewById(R.id.radioQ25);
         radioH30 = findViewById(R.id.radioH30);
+        tabla = findViewById(R.id.tableLayoutQR);
 
         //Seleccionar el nivel de error
         radioL7.setChecked(true);
@@ -61,8 +68,8 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 version = 1;
                 tamanio = 0;
-                String text = "HELLO WORLD";
-                if(editText.getText().toString().isEmpty()) editText.setText("HELLO WORLD"); //Control de error
+                String text = "hello world";
+                if(editText.getText().toString().isEmpty()) editText.setText("hello world"); //Control de error
                 else text = editText.getText().toString();
                 String binario = "";
 
@@ -443,7 +450,7 @@ public class MainActivity extends AppCompatActivity {
                                 bloquesGrupo1 = 1; codewordsGrupo1 = 9; bloquesGrupo2 = 0; codewordsGrupo2 = 0;}
                             break;
                         case 2:
-                            bitsExtra = 7;
+                            bitsExtra = 7; alignmentPattern = new int[]{6,18};
                             if(errorCorrection == 7) {bitsNecesarios = 34; bloquesCorreccion = 10;
                                 bloquesGrupo1 = 1; codewordsGrupo1 = 34; bloquesGrupo2 = 0; codewordsGrupo2 = 0;}
                             else if(errorCorrection == 15) {bitsNecesarios = 28; bloquesCorreccion = 16;
@@ -454,7 +461,7 @@ public class MainActivity extends AppCompatActivity {
                                 bloquesGrupo1 = 1; codewordsGrupo1 = 16; bloquesGrupo2 = 0; codewordsGrupo2 = 0;}
                             break;
                         case 3:
-                            bitsExtra = 7;
+                            bitsExtra = 7; alignmentPattern = new int[]{6,22};
                             if(errorCorrection == 7) {bitsNecesarios = 55; bloquesCorreccion = 15;
                                 bloquesGrupo1 = 1; codewordsGrupo1 = 55; bloquesGrupo2 = 0; codewordsGrupo2 = 0;}
                             else if(errorCorrection == 15) {bitsNecesarios = 44; bloquesCorreccion = 26;
@@ -465,7 +472,7 @@ public class MainActivity extends AppCompatActivity {
                                 bloquesGrupo1 = 2; codewordsGrupo1 = 13; bloquesGrupo2 = 0; codewordsGrupo2 = 0;}
                             break;
                         case 4:
-                            bitsExtra = 7;
+                            bitsExtra = 7; alignmentPattern = new int[]{6,26};
                             if(errorCorrection == 7) {bitsNecesarios = 80; bloquesCorreccion = 20;
                                 bloquesGrupo1 = 1; codewordsGrupo1 = 80; bloquesGrupo2 = 0; codewordsGrupo2 = 0;}
                             else if(errorCorrection == 15) {bitsNecesarios = 64; bloquesCorreccion = 18;
@@ -475,7 +482,7 @@ public class MainActivity extends AppCompatActivity {
                             else if(errorCorrection == 30) {bitsNecesarios = 36; bloquesCorreccion = 16;
                                 bloquesGrupo1 = 4; codewordsGrupo1 = 9; bloquesGrupo2 = 0; codewordsGrupo2 = 0;}
                         case 5:
-                            bitsExtra = 7;
+                            bitsExtra = 7; alignmentPattern = new int[]{6,30};
                             if(errorCorrection == 7) {bitsNecesarios = 108; bloquesCorreccion = 26;
                                 bloquesGrupo1 = 1; codewordsGrupo1 = 108; bloquesGrupo2 = 0; codewordsGrupo2 = 0;}
                             else if(errorCorrection == 15) {bitsNecesarios = 86; bloquesCorreccion = 24;
@@ -486,7 +493,7 @@ public class MainActivity extends AppCompatActivity {
                                 bloquesGrupo1 = 2; codewordsGrupo1 = 11; bloquesGrupo2 = 2; codewordsGrupo2 = 12;}
                             break;
                         case 6:
-                            bitsExtra = 7;
+                            bitsExtra = 7; alignmentPattern = new int[]{6,34};
                             if(errorCorrection == 7) {bitsNecesarios = 136; bloquesCorreccion = 18;
                                 bloquesGrupo1 = 2; codewordsGrupo1 = 68; bloquesGrupo2 = 0; codewordsGrupo2 = 0;}
                             else if(errorCorrection == 15) {bitsNecesarios = 108; bloquesCorreccion = 16;
@@ -496,7 +503,7 @@ public class MainActivity extends AppCompatActivity {
                             else if(errorCorrection == 30) {bitsNecesarios = 60; bloquesCorreccion = 28;
                                 bloquesGrupo1 = 4; codewordsGrupo1 = 15; bloquesGrupo2 = 0; codewordsGrupo2 = 0;}
                             break;
-                        case 7:
+                        case 7: alignmentPattern = new int[]{6,22, 38};
                             bitsExtra = 0;
                             if(errorCorrection == 7) {bitsNecesarios = 156; bloquesCorreccion = 20;
                                 bloquesGrupo1 = 2; codewordsGrupo1 = 78; bloquesGrupo2 = 0; codewordsGrupo2 = 0;}
@@ -508,7 +515,7 @@ public class MainActivity extends AppCompatActivity {
                                 bloquesGrupo1 = 4; codewordsGrupo1 = 13; bloquesGrupo2 = 1; codewordsGrupo2 = 14;}
                             break;
                         case 8:
-                            bitsExtra = 0;
+                            bitsExtra = 0; alignmentPattern = new int[]{6,24, 42};
                             if(errorCorrection == 7) {bitsNecesarios = 194; bloquesCorreccion = 24;
                                 bloquesGrupo1 = 2; codewordsGrupo1 = 97; bloquesGrupo2 = 0; codewordsGrupo2 = 0;}
                             else if(errorCorrection == 15) {bitsNecesarios = 154; bloquesCorreccion = 22;
@@ -519,7 +526,7 @@ public class MainActivity extends AppCompatActivity {
                                 bloquesGrupo1 = 4; codewordsGrupo1 = 14; bloquesGrupo2 = 2; codewordsGrupo2 = 15;}
                             break;
                         case 9:
-                            bitsExtra = 0;
+                            bitsExtra = 0; alignmentPattern = new int[]{6,26, 46};
                             if(errorCorrection == 7) {bitsNecesarios = 232; bloquesCorreccion = 30;
                                 bloquesGrupo1 = 2; codewordsGrupo1 = 116; bloquesGrupo2 = 0; codewordsGrupo2 = 0;}
                             else if(errorCorrection == 15) {bitsNecesarios = 182; bloquesCorreccion = 22;
@@ -530,7 +537,7 @@ public class MainActivity extends AppCompatActivity {
                                 bloquesGrupo1 = 4; codewordsGrupo1 = 12; bloquesGrupo2 = 4; codewordsGrupo2 = 13;}
                             break;
                         case 10:
-                            bitsExtra = 0;
+                            bitsExtra = 0; alignmentPattern = new int[]{6,28, 50};
                             if(errorCorrection == 7) {bitsNecesarios = 274; bloquesCorreccion = 18;
                                 bloquesGrupo1 = 2; codewordsGrupo1 = 68; bloquesGrupo2 = 2; codewordsGrupo2 = 69;}
                             else if(errorCorrection == 15) {bitsNecesarios = 216; bloquesCorreccion = 26;
@@ -541,7 +548,7 @@ public class MainActivity extends AppCompatActivity {
                                 bloquesGrupo1 = 6; codewordsGrupo1 = 15; bloquesGrupo2 = 2; codewordsGrupo2 = 16;}
                             break;
                         case 11:
-                            bitsExtra = 0;
+                            bitsExtra = 0; alignmentPattern = new int[]{6,30, 54};
                             if(errorCorrection == 7) {bitsNecesarios = 324; bloquesCorreccion = 20;
                                 bloquesGrupo1 = 4; codewordsGrupo1 = 81; bloquesGrupo2 = 0; codewordsGrupo2 = 0;}
                             else if(errorCorrection == 15) {bitsNecesarios = 254; bloquesCorreccion = 30;
@@ -552,7 +559,7 @@ public class MainActivity extends AppCompatActivity {
                                 bloquesGrupo1 = 3; codewordsGrupo1 = 12; bloquesGrupo2 = 8; codewordsGrupo2 = 13;}
                             break;
                         case 12:
-                            bitsExtra = 0;
+                            bitsExtra = 0; alignmentPattern = new int[]{6,32, 58};
                             if(errorCorrection == 7) {bitsNecesarios = 370; bloquesCorreccion = 24;
                                 bloquesGrupo1 = 2; codewordsGrupo1 = 92; bloquesGrupo2 = 2; codewordsGrupo2 = 93;}
                             else if(errorCorrection == 15) {bitsNecesarios = 290; bloquesCorreccion = 22;
@@ -563,7 +570,7 @@ public class MainActivity extends AppCompatActivity {
                                 bloquesGrupo1 = 7; codewordsGrupo1 = 14; bloquesGrupo2 = 4; codewordsGrupo2 = 15;}
                             break;
                         case 13:
-                            bitsExtra = 0;
+                            bitsExtra = 0; alignmentPattern = new int[]{6,34, 62};
                             if(errorCorrection == 7) {bitsNecesarios = 428; bloquesCorreccion = 26;
                                 bloquesGrupo1 = 4; codewordsGrupo1 = 107; bloquesGrupo2 = 0; codewordsGrupo2 = 0;}
                             else if(errorCorrection == 15) {bitsNecesarios = 334; bloquesCorreccion = 22;
@@ -574,7 +581,7 @@ public class MainActivity extends AppCompatActivity {
                                 bloquesGrupo1 = 12; codewordsGrupo1 = 11; bloquesGrupo2 = 4; codewordsGrupo2 = 12;}
                             break;
                         case 14:
-                            bitsExtra = 3;
+                            bitsExtra = 3; alignmentPattern = new int[]{6,26, 46, 66};
                             if(errorCorrection == 7) {bitsNecesarios = 461; bloquesCorreccion = 30;
                                 bloquesGrupo1 = 3; codewordsGrupo1 = 115; bloquesGrupo2 = 1; codewordsGrupo2 = 116;}
                             else if(errorCorrection == 15) {bitsNecesarios = 365; bloquesCorreccion = 24;
@@ -585,7 +592,7 @@ public class MainActivity extends AppCompatActivity {
                                 bloquesGrupo1 = 11; codewordsGrupo1 = 12; bloquesGrupo2 = 5; codewordsGrupo2 = 13;}
                             break;
                         case 15:
-                            bitsExtra = 3;
+                            bitsExtra = 3; alignmentPattern = new int[]{6,26, 48, 70};
                             if(errorCorrection == 7) {bitsNecesarios = 523; bloquesCorreccion = 22;
                                 bloquesGrupo1 = 5; codewordsGrupo1 = 87; bloquesGrupo2 = 1; codewordsGrupo2 = 88;}
                             else if(errorCorrection == 15) {bitsNecesarios = 415; bloquesCorreccion = 24;
@@ -596,7 +603,7 @@ public class MainActivity extends AppCompatActivity {
                                 bloquesGrupo1 = 11; codewordsGrupo1 = 12; bloquesGrupo2 = 7; codewordsGrupo2 = 13;}
                             break;
                         case 16:
-                            bitsExtra = 3;
+                            bitsExtra = 3; alignmentPattern = new int[]{6,26, 50, 74};
                             if(errorCorrection == 7) {bitsNecesarios = 589; bloquesCorreccion = 24;
                                 bloquesGrupo1 = 5; codewordsGrupo1 = 98; bloquesGrupo2 = 1; codewordsGrupo2 = 99;}
                             else if(errorCorrection == 15) {bitsNecesarios = 453; bloquesCorreccion = 28;
@@ -607,7 +614,7 @@ public class MainActivity extends AppCompatActivity {
                                 bloquesGrupo1 = 3; codewordsGrupo1 = 15; bloquesGrupo2 = 13; codewordsGrupo2 = 16;}
                             break;
                         case 17:
-                            bitsExtra = 3;
+                            bitsExtra = 3; alignmentPattern = new int[]{6, 30, 54, 78};
                             if(errorCorrection == 7) {bitsNecesarios = 647; bloquesCorreccion = 28;
                                 bloquesGrupo1 = 1; codewordsGrupo1 = 107; bloquesGrupo2 = 5; codewordsGrupo2 = 108;}
                             else if(errorCorrection == 15) {bitsNecesarios = 507; bloquesCorreccion = 28;
@@ -618,7 +625,7 @@ public class MainActivity extends AppCompatActivity {
                                 bloquesGrupo1 = 2; codewordsGrupo1 = 14; bloquesGrupo2 = 17; codewordsGrupo2 = 15;}
                             break;
                         case 18:
-                            bitsExtra = 3;
+                            bitsExtra = 3; alignmentPattern = new int[]{6, 30, 56, 82};
                             if(errorCorrection == 7) {bitsNecesarios = 721; bloquesCorreccion = 30;
                                 bloquesGrupo1 = 5; codewordsGrupo1 = 120; bloquesGrupo2 = 1; codewordsGrupo2 = 121;}
                             else if(errorCorrection == 15) {bitsNecesarios = 563; bloquesCorreccion = 26;
@@ -629,7 +636,7 @@ public class MainActivity extends AppCompatActivity {
                                 bloquesGrupo1 = 2; codewordsGrupo1 = 14; bloquesGrupo2 = 19; codewordsGrupo2 = 15;}
                             break;
                         case 19:
-                            bitsExtra = 3;
+                            bitsExtra = 3; alignmentPattern = new int[]{6, 30, 58, 86};
                             if(errorCorrection == 7) {bitsNecesarios = 795; bloquesCorreccion = 28;
                                 bloquesGrupo1 = 3; codewordsGrupo1 = 113; bloquesGrupo2 = 4; codewordsGrupo2 = 114;}
                             else if(errorCorrection == 15) {bitsNecesarios = 627; bloquesCorreccion = 26;
@@ -640,7 +647,7 @@ public class MainActivity extends AppCompatActivity {
                                 bloquesGrupo1 = 9; codewordsGrupo1 = 13; bloquesGrupo2 = 16; codewordsGrupo2 = 14;}
                             break;
                         case 20:
-                            bitsExtra = 3;
+                            bitsExtra = 3; alignmentPattern = new int[]{6, 34, 62, 90};
                             if(errorCorrection == 7) {bitsNecesarios = 861; bloquesCorreccion = 28;
                                 bloquesGrupo1 = 3; codewordsGrupo1 = 107; bloquesGrupo2 = 5; codewordsGrupo2 = 108;}
                             else if(errorCorrection == 15) {bitsNecesarios = 669; bloquesCorreccion = 26;
@@ -695,7 +702,6 @@ public class MainActivity extends AppCompatActivity {
                         for(int j = 0; j < grupo2[i].length; j++) residuoGrupo2[i] = XORprocedimiento(residuoGrupo2[i]);
                     }
                     //A los indices hay que sumarles la variable bloquesCorreccion para usarlos
-                    //Primero poner el residuo y luego el polinomio porque estan invertidos los arreglos
 
                     //Calcular por cuanto se debe multiplicar el generador polinomial para que el primer elemento (ultimo en el arreglo)
                     //tenga el mismo exponente de x que el primer elemento (ultimo en el arreglo) del polinomio
@@ -703,8 +709,9 @@ public class MainActivity extends AppCompatActivity {
                     //int sumarGenPolinomial = polinomio.length-1 + bloquesCorreccion - genPolinomial.length-1;
 
                     //Intercalar los data codewords y los error correction codewords
-                    int[] polinomio = IntercalarCodewords(grupo1, grupo2, bloquesGrupo1*codewordsGrupo1 + bloquesGrupo2*codewordsGrupo2);
-                    int[] residuo = IntercalarCodewords(residuoGrupo1, residuoGrupo2, bloquesCorreccion*bloquesGrupo1 + bloquesCorreccion*bloquesGrupo2);
+                    int[] polinomio = IntercalarCodewords(grupo1, grupo2, bloquesGrupo1*codewordsGrupo1 + bloquesGrupo2*codewordsGrupo2, codewordsGrupo1, codewordsGrupo2);
+                    int[] residuo = IntercalarCodewords(residuoGrupo1, residuoGrupo2, bloquesCorreccion*bloquesGrupo1 + bloquesCorreccion*bloquesGrupo2,
+                            bloquesCorreccion, bloquesCorreccion);
 
                     //Concatenar los arreglos, primero los data codewords y luego los error correction codewords
                     String finalMessage = "";
@@ -721,12 +728,144 @@ public class MainActivity extends AppCompatActivity {
                         finalMessage += auxString;
                     }
 
-                    //Añadir los bits extra necesarios segun la version
-                    for(int i = 0; i < bitsExtra; i++) finalMessage += "0";
+                    for(int i = 0; i < bitsExtra; i++) finalMessage += "0"; //Añadir los bits extra necesarios segun la version
+                    //textViewBinario.setText(finalMessage);
 
-                    String aux = "";
-                    //for(int i = 0; i < finalMessage.length; i++) aux += finalMessage[i] + " ";
-                    textViewBinario.setText(finalMessage);
+                    TextView[][] celdas = new TextView[tamanio+8][tamanio+8]; //Crear la tabla para el QR
+                    for(int i = 0; i < tamanio+8; i++)
+                    {
+                        TableRow row = new TableRow(tabla.getContext());
+                        row.setGravity(0);
+
+                        for(int j = 0; j < tamanio+8; j++)
+                        {
+                            TextView numBin = new TextView(tabla.getContext());
+                            numBin.setBackgroundColor(Color.MAGENTA); //-65281
+                            numBin.setText("0");
+                            numBin.setWidth(tabla.getWidth()/(tamanio+8));
+                            numBin.setHeight(tabla.getWidth()/(tamanio+8));
+                            celdas[i][j] = numBin;
+                            row.addView(numBin);
+                        }
+                        tabla.addView(row);
+                    }
+
+                    for(int i = 0; i < celdas.length; i++) //Crear la quiet zone
+                    {
+                        for(int j = 0; j < celdas.length; j++)
+                        {
+                            if(i < 4 || i >= tamanio+4) {celdas[i][j].setBackgroundColor(Color.WHITE); celdas[i][j].setText("");}
+                            if(j < 4 || j >= tamanio+4) {celdas[i][j].setBackgroundColor(Color.WHITE); celdas[i][j].setText("");}
+                        }
+                    }
+
+                    //Crear los separadores
+                    for(int i = 4; i < 12; i++) {for(int j = 4; j < 12; j++) {celdas[i][j].setBackgroundColor(Color.WHITE); celdas[i][j].setText("");}}
+                    for(int i = celdas.length-5; i >= celdas.length-12; i--) {for(int j = 4; j < 12; j++) {celdas[i][j].setBackgroundColor(Color.WHITE); celdas[i][j].setText("");}}
+                    for(int i = 4; i < 12; i++) {for(int j = celdas.length-5; j >= celdas.length-12; j--) {celdas[i][j].setBackgroundColor(Color.WHITE); celdas[i][j].setText("");}}
+
+                    //Crear los finder patterns, cuadro negro grande
+                    for(int i = 4; i < 11; i++) {for(int j = 4; j < 11; j++) {celdas[i][j].setBackgroundColor(Color.BLACK); celdas[i][j].setText("");}}
+                    for(int i = celdas.length-5; i >= celdas.length-11; i--) {for(int j = 4; j < 11; j++) {celdas[i][j].setBackgroundColor(Color.BLACK); celdas[i][j].setText("");}}
+                    for(int i = 4; i < 11; i++) {for(int j = celdas.length-5; j >= celdas.length-11; j--) {celdas[i][j].setBackgroundColor(Color.BLACK); celdas[i][j].setText("");}}
+
+                    //Crear los finder patterns, cuadro blanco
+                    for(int i = 5; i < 10; i++) {for(int j = 5; j < 10; j++) {celdas[i][j].setBackgroundColor(Color.WHITE); celdas[i][j].setText("");}}
+                    for(int i = celdas.length-6; i >= celdas.length-10; i--) {for(int j = 5; j < 10; j++) {celdas[i][j].setBackgroundColor(Color.WHITE); celdas[i][j].setText("");}}
+                    for(int i = 5; i < 10; i++) {for(int j = celdas.length-6; j >= celdas.length-10; j--) {celdas[i][j].setBackgroundColor(Color.WHITE); celdas[i][j].setText("");}}
+
+                    //Crear los finder patterns, cuadro negro chico
+                    for(int i = 6; i < 9; i++) {for(int j = 6; j < 9; j++) {celdas[i][j].setBackgroundColor(Color.BLACK); celdas[i][j].setText("");}}
+                    for(int i = celdas.length-7; i >= celdas.length-9; i--) {for(int j = 6; j < 9; j++) {celdas[i][j].setBackgroundColor(Color.BLACK); celdas[i][j].setText("");}}
+                    for(int i = 6; i < 9; i++) {for(int j = celdas.length-7; j >= celdas.length-9; j--) {celdas[i][j].setBackgroundColor(Color.BLACK); celdas[i][j].setText("");}}
+
+                    //Crear los alignment patterns
+                    if(version > 1)
+                    {
+                        for(int i = 0; i < alignmentPattern.length; i++)
+                        {
+                            for(int j = 0; j < alignmentPattern.length; j++)
+                            {
+                                if(celdas[alignmentPattern[i]+2][alignmentPattern[j]+2].getText() == "0"
+                                        && celdas[alignmentPattern[i]+2][alignmentPattern[j]+6].getText() == "0"
+                                        && celdas[alignmentPattern[i]+6][alignmentPattern[j]+2].getText() == "0"
+                                        && celdas[alignmentPattern[i]+6][alignmentPattern[j]+6].getText() == "0")
+                                {
+                                    for(int k = alignmentPattern[i]+2; k < alignmentPattern[i]+7; k++) //Cuadro grande negro
+                                    {
+                                        for(int l = alignmentPattern[j]+2; l < alignmentPattern[j]+7; l++)
+                                        { celdas[k][l].setBackgroundColor(Color.BLACK);celdas[k][l].setText(""); }
+                                    }
+                                    for(int k = alignmentPattern[i]+3; k < alignmentPattern[i]+6; k++) //Cuadro blanco
+                                    {
+                                        for(int l = alignmentPattern[j]+3; l < alignmentPattern[j]+6; l++)
+                                        { celdas[k][l].setBackgroundColor(Color.WHITE);celdas[k][l].setText(""); }
+                                    }
+                                    celdas[alignmentPattern[i]+4][alignmentPattern[j]+4].setBackgroundColor(Color.BLACK); //centro
+                                    celdas[alignmentPattern[i]+4][alignmentPattern[j]+4].setText(""); //centro
+                                }
+                            }
+                        }
+                    }
+
+                    for(int i = 12; i < tamanio-4; i += 2) //Crear los timing patterns
+                    {
+                        celdas[10][i].setBackgroundColor(Color.BLACK); celdas[10][i].setText(""); //Horizontal negro
+                        if(celdas[10][i+1].getText() == "0") {celdas[10][i+1].setBackgroundColor(Color.WHITE); celdas[10][i+1].setText("");} //Horizontal blanco
+
+                        celdas[i][10].setBackgroundColor(Color.BLACK); celdas[i][10].setText(""); //Vertical negro
+                        if(celdas[i+1][10].getText() == "0") {celdas[i+1][10].setBackgroundColor(Color.WHITE); celdas[i+1][10].setText("");} //Vertical blanco
+                    }
+
+                    celdas[4*version + 13][12].setBackgroundColor(Color.BLACK); celdas[4*version + 13][12].setText(""); //Crear el dark module
+
+                    for(int i = 4; i < 13; i++) //Reservar la format information area
+                    {
+                        if(celdas[12][i].getText() == "0") {celdas[12][i].setBackgroundColor(Color.BLUE); celdas[12][i].setText("1");} //Horizontal izquierda
+                        if(celdas[i][12].getText() == "0") {celdas[i][12].setBackgroundColor(Color.BLUE); celdas[i][12].setText("1");} //Vertical arriba
+                    }
+                    for(int i = tamanio+4; i >= tamanio-4; i--)
+                    {
+                        if(celdas[12][i].getText() == "0") {celdas[12][i].setBackgroundColor(Color.BLUE); celdas[12][i].setText("1"); } //Horizontal derecha
+                        if(celdas[i][12].getText() == "0") {celdas[i][12].setBackgroundColor(Color.BLUE); celdas[i][12].setText("1"); } //Verical abajo
+                    }
+
+                    if(version >= 7) //Reservar la version information area para los qr a partir de la version 7
+                    {
+                        for(int i = tamanio-4; i >= tamanio-7; i--)
+                        {
+                            for(int j = 4; j < 11; i++)
+                            {
+                                celdas[i][j].setBackgroundColor(Color.GREEN); celdas[i][j].setText("2"); //Superior derecha
+                                celdas[j][i].setBackgroundColor(Color.GREEN); celdas[j][i].setText("2"); //Inferior izquierda
+                            }
+                        }
+                    }
+
+                    contBits = 0; //Agregar los data bits
+                    for(int i = tamanio+4; i >= 4; i -= 2)
+                    {
+                        if(i == 9) i--;
+                        for(int j = tamanio+4; j >= 4; j--)
+                        {
+                            if(celdas[j][i].getText() == "0")
+                            {
+                                if(finalMessage.charAt(contBits) == '0') celdas[j][i].setBackgroundColor(Color.WHITE);
+                                else celdas[j][i].setBackgroundColor(Color.BLACK);
+                                celdas[j][i].setText("");
+                                contBits++;
+                            }
+                            if(celdas[j][i+1].getText() == "0")
+                            {
+                                if(finalMessage.charAt(contBits) == '0') celdas[j][i+1].setBackgroundColor(Color.WHITE);
+                                else celdas[j][i+1].setBackgroundColor(Color.BLACK);
+                                celdas[j][i+1].setText("");
+                                contBits++;
+                            }
+                        }
+                    }
+
+                    
 
                 }
             }
@@ -872,13 +1011,13 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    public int[] IntercalarCodewords(int[][] grupo1, int[][] grupo2, int tamanioPoli)
+    public int[] IntercalarCodewords(int[][] grupo1, int[][] grupo2, int tamanioPoli, int a, int b)
     {
         int[] polinomio = new int[tamanioPoli];
         int longPoli = 0, long1 = 0, long2 = 0;
         while(longPoli < polinomio.length)
         {
-            if(long1 < codewordsGrupo1)
+            if(long1 < a)
             {
                 for(int i = 0; i < grupo1.length; i++)
                 {
@@ -887,7 +1026,7 @@ public class MainActivity extends AppCompatActivity {
                     long1++;
                 }
             }
-            if(long2 < codewordsGrupo2)
+            if(long2 < b)
             {
                 for(int i = 0; i < grupo2.length; i++)
                 {
