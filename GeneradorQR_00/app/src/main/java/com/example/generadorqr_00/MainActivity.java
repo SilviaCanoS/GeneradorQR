@@ -659,7 +659,6 @@ public class MainActivity extends AppCompatActivity {
                             break;
                     }
                     bitsNecesarios *= 8;
-                    textViewVersion.setText("Versión: " + version + " - Tamaño: " + tamanio + "x" + tamanio);
 
                     if(bitsNecesarios - cifrado.length() == 1) cifrado += "0"; //Agregar el terminador
                     else if(bitsNecesarios - cifrado.length() == 2) cifrado += "00";
@@ -741,7 +740,7 @@ public class MainActivity extends AppCompatActivity {
                         {
                             TextView numBin = new TextView(tabla.getContext());
                             numBin.setBackgroundColor(Color.MAGENTA); //-65281
-                            numBin.setText("0");
+                            numBin.setText("S");
                             numBin.setWidth(tabla.getWidth()/(tamanio+8));
                             numBin.setHeight(tabla.getWidth()/(tamanio+8));
                             celdas[i][j] = numBin;
@@ -760,24 +759,24 @@ public class MainActivity extends AppCompatActivity {
                     }
 
                     //Crear los separadores
-                    for(int i = 4; i < 12; i++) {for(int j = 4; j < 12; j++) {celdas[i][j].setBackgroundColor(Color.WHITE); celdas[i][j].setText("");}}
-                    for(int i = celdas.length-5; i >= celdas.length-12; i--) {for(int j = 4; j < 12; j++) {celdas[i][j].setBackgroundColor(Color.WHITE); celdas[i][j].setText("");}}
-                    for(int i = 4; i < 12; i++) {for(int j = celdas.length-5; j >= celdas.length-12; j--) {celdas[i][j].setBackgroundColor(Color.WHITE); celdas[i][j].setText("");}}
+                    for(int i = 4; i < 12; i++) {for(int j = 4; j < 12; j++) {celdas[i][j].setBackgroundColor(Color.WHITE); celdas[i][j].setText("0");}}
+                    for(int i = celdas.length-5; i >= celdas.length-12; i--) {for(int j = 4; j < 12; j++) {celdas[i][j].setBackgroundColor(Color.WHITE); celdas[i][j].setText("0");}}
+                    for(int i = 4; i < 12; i++) {for(int j = celdas.length-5; j >= celdas.length-12; j--) {celdas[i][j].setBackgroundColor(Color.WHITE); celdas[i][j].setText("0");}}
 
                     //Crear los finder patterns, cuadro negro grande
-                    for(int i = 4; i < 11; i++) {for(int j = 4; j < 11; j++) {celdas[i][j].setBackgroundColor(Color.BLACK); celdas[i][j].setText("");}}
-                    for(int i = celdas.length-5; i >= celdas.length-11; i--) {for(int j = 4; j < 11; j++) {celdas[i][j].setBackgroundColor(Color.BLACK); celdas[i][j].setText("");}}
-                    for(int i = 4; i < 11; i++) {for(int j = celdas.length-5; j >= celdas.length-11; j--) {celdas[i][j].setBackgroundColor(Color.BLACK); celdas[i][j].setText("");}}
+                    for(int i = 4; i < 11; i++) {for(int j = 4; j < 11; j++) {celdas[i][j].setBackgroundColor(Color.BLACK); celdas[i][j].setText("1");}}
+                    for(int i = celdas.length-5; i >= celdas.length-11; i--) {for(int j = 4; j < 11; j++) {celdas[i][j].setBackgroundColor(Color.BLACK); celdas[i][j].setText("1");}}
+                    for(int i = 4; i < 11; i++) {for(int j = celdas.length-5; j >= celdas.length-11; j--) {celdas[i][j].setBackgroundColor(Color.BLACK); celdas[i][j].setText("1");}}
 
                     //Crear los finder patterns, cuadro blanco
-                    for(int i = 5; i < 10; i++) {for(int j = 5; j < 10; j++) {celdas[i][j].setBackgroundColor(Color.WHITE); celdas[i][j].setText("");}}
-                    for(int i = celdas.length-6; i >= celdas.length-10; i--) {for(int j = 5; j < 10; j++) {celdas[i][j].setBackgroundColor(Color.WHITE); celdas[i][j].setText("");}}
-                    for(int i = 5; i < 10; i++) {for(int j = celdas.length-6; j >= celdas.length-10; j--) {celdas[i][j].setBackgroundColor(Color.WHITE); celdas[i][j].setText("");}}
+                    for(int i = 5; i < 10; i++) {for(int j = 5; j < 10; j++) {celdas[i][j].setBackgroundColor(Color.WHITE); celdas[i][j].setText("0");}}
+                    for(int i = celdas.length-6; i >= celdas.length-10; i--) {for(int j = 5; j < 10; j++) {celdas[i][j].setBackgroundColor(Color.WHITE); celdas[i][j].setText("0");}}
+                    for(int i = 5; i < 10; i++) {for(int j = celdas.length-6; j >= celdas.length-10; j--) {celdas[i][j].setBackgroundColor(Color.WHITE); celdas[i][j].setText("0");}}
 
                     //Crear los finder patterns, cuadro negro chico
-                    for(int i = 6; i < 9; i++) {for(int j = 6; j < 9; j++) {celdas[i][j].setBackgroundColor(Color.BLACK); celdas[i][j].setText("");}}
-                    for(int i = celdas.length-7; i >= celdas.length-9; i--) {for(int j = 6; j < 9; j++) {celdas[i][j].setBackgroundColor(Color.BLACK); celdas[i][j].setText("");}}
-                    for(int i = 6; i < 9; i++) {for(int j = celdas.length-7; j >= celdas.length-9; j--) {celdas[i][j].setBackgroundColor(Color.BLACK); celdas[i][j].setText("");}}
+                    for(int i = 6; i < 9; i++) {for(int j = 6; j < 9; j++) {celdas[i][j].setBackgroundColor(Color.BLACK); celdas[i][j].setText("1");}}
+                    for(int i = celdas.length-7; i >= celdas.length-9; i--) {for(int j = 6; j < 9; j++) {celdas[i][j].setBackgroundColor(Color.BLACK); celdas[i][j].setText("1");}}
+                    for(int i = 6; i < 9; i++) {for(int j = celdas.length-7; j >= celdas.length-9; j--) {celdas[i][j].setBackgroundColor(Color.BLACK); celdas[i][j].setText("1");}}
 
                     //Crear los alignment patterns
                     if(version > 1)
@@ -786,23 +785,23 @@ public class MainActivity extends AppCompatActivity {
                         {
                             for(int j = 0; j < alignmentPattern.length; j++)
                             {
-                                if(celdas[alignmentPattern[i]+2][alignmentPattern[j]+2].getText() == "0"
-                                        && celdas[alignmentPattern[i]+2][alignmentPattern[j]+6].getText() == "0"
-                                        && celdas[alignmentPattern[i]+6][alignmentPattern[j]+2].getText() == "0"
-                                        && celdas[alignmentPattern[i]+6][alignmentPattern[j]+6].getText() == "0")
+                                if(celdas[alignmentPattern[i]+2][alignmentPattern[j]+2].getText() == "S"
+                                        && celdas[alignmentPattern[i]+2][alignmentPattern[j]+6].getText() == "S"
+                                        && celdas[alignmentPattern[i]+6][alignmentPattern[j]+2].getText() == "S"
+                                        && celdas[alignmentPattern[i]+6][alignmentPattern[j]+6].getText() == "S")
                                 {
                                     for(int k = alignmentPattern[i]+2; k < alignmentPattern[i]+7; k++) //Cuadro grande negro
                                     {
                                         for(int l = alignmentPattern[j]+2; l < alignmentPattern[j]+7; l++)
-                                        { celdas[k][l].setBackgroundColor(Color.BLACK);celdas[k][l].setText(""); }
+                                        { celdas[k][l].setBackgroundColor(Color.BLACK);celdas[k][l].setText("1"); }
                                     }
                                     for(int k = alignmentPattern[i]+3; k < alignmentPattern[i]+6; k++) //Cuadro blanco
                                     {
                                         for(int l = alignmentPattern[j]+3; l < alignmentPattern[j]+6; l++)
-                                        { celdas[k][l].setBackgroundColor(Color.WHITE);celdas[k][l].setText(""); }
+                                        { celdas[k][l].setBackgroundColor(Color.WHITE);celdas[k][l].setText("0"); }
                                     }
                                     celdas[alignmentPattern[i]+4][alignmentPattern[j]+4].setBackgroundColor(Color.BLACK); //centro
-                                    celdas[alignmentPattern[i]+4][alignmentPattern[j]+4].setText(""); //centro
+                                    celdas[alignmentPattern[i]+4][alignmentPattern[j]+4].setText("1"); //centro
                                 }
                             }
                         }
@@ -810,24 +809,24 @@ public class MainActivity extends AppCompatActivity {
 
                     for(int i = 12; i < tamanio-4; i += 2) //Crear los timing patterns
                     {
-                        celdas[10][i].setBackgroundColor(Color.BLACK); celdas[10][i].setText(""); //Horizontal negro
-                        if(celdas[10][i+1].getText() == "0") {celdas[10][i+1].setBackgroundColor(Color.WHITE); celdas[10][i+1].setText("");} //Horizontal blanco
+                        celdas[10][i].setBackgroundColor(Color.BLACK); celdas[10][i].setText("1"); //Horizontal negro
+                        if(celdas[10][i+1].getText() == "S") {celdas[10][i+1].setBackgroundColor(Color.WHITE); celdas[10][i+1].setText("0");} //Horizontal blanco
 
-                        celdas[i][10].setBackgroundColor(Color.BLACK); celdas[i][10].setText(""); //Vertical negro
-                        if(celdas[i+1][10].getText() == "0") {celdas[i+1][10].setBackgroundColor(Color.WHITE); celdas[i+1][10].setText("");} //Vertical blanco
+                        celdas[i][10].setBackgroundColor(Color.BLACK); celdas[i][10].setText("1"); //Vertical negro
+                        if(celdas[i+1][10].getText() == "S") {celdas[i+1][10].setBackgroundColor(Color.WHITE); celdas[i+1][10].setText("0");} //Vertical blanco
                     }
 
-                    celdas[4*version + 13][12].setBackgroundColor(Color.BLACK); celdas[4*version + 13][12].setText(""); //Crear el dark module
+                    celdas[4*version + 13][12].setBackgroundColor(Color.BLACK); celdas[4*version + 13][12].setText("1"); //Crear el dark module
 
                     for(int i = 4; i < 13; i++) //Reservar la format information area
                     {
-                        if(celdas[12][i].getText() == "0") {celdas[12][i].setBackgroundColor(Color.BLUE); celdas[12][i].setText("1");} //Horizontal izquierda
-                        if(celdas[i][12].getText() == "0") {celdas[i][12].setBackgroundColor(Color.BLUE); celdas[i][12].setText("1");} //Vertical arriba
+                        if(celdas[12][i].getText() == "S") {celdas[12][i].setBackgroundColor(Color.BLUE); celdas[12][i].setText("2");} //Horizontal izquierda
+                        if(celdas[i][12].getText() == "S") {celdas[i][12].setBackgroundColor(Color.BLUE); celdas[i][12].setText("2");} //Vertical arriba
                     }
                     for(int i = tamanio+4; i >= tamanio-4; i--)
                     {
-                        if(celdas[12][i].getText() == "0") {celdas[12][i].setBackgroundColor(Color.BLUE); celdas[12][i].setText("1"); } //Horizontal derecha
-                        if(celdas[i][12].getText() == "0") {celdas[i][12].setBackgroundColor(Color.BLUE); celdas[i][12].setText("1"); } //Verical abajo
+                        if(celdas[12][i].getText() == "S") {celdas[12][i].setBackgroundColor(Color.BLUE); celdas[12][i].setText("2"); } //Horizontal derecha
+                        if(celdas[i][12].getText() == "S") {celdas[i][12].setBackgroundColor(Color.BLUE); celdas[i][12].setText("2"); } //Verical abajo
                     }
 
                     if(version >= 7) //Reservar la version information area para los qr a partir de la version 7
@@ -836,8 +835,8 @@ public class MainActivity extends AppCompatActivity {
                         {
                             for(int j = 4; j < 11; i++)
                             {
-                                celdas[i][j].setBackgroundColor(Color.GREEN); celdas[i][j].setText("2"); //Superior derecha
-                                celdas[j][i].setBackgroundColor(Color.GREEN); celdas[j][i].setText("2"); //Inferior izquierda
+                                celdas[i][j].setBackgroundColor(Color.GREEN); celdas[i][j].setText("3"); //Superior derecha
+                                celdas[j][i].setBackgroundColor(Color.GREEN); celdas[j][i].setText("3"); //Inferior izquierda
                             }
                         }
                     }
@@ -848,24 +847,34 @@ public class MainActivity extends AppCompatActivity {
                         if(i == 9) i--;
                         for(int j = tamanio+4; j >= 4; j--)
                         {
-                            if(celdas[j][i].getText() == "0")
+                            if(celdas[j][i].getText() == "S")
                             {
-                                if(finalMessage.charAt(contBits) == '0') celdas[j][i].setBackgroundColor(Color.WHITE);
-                                else celdas[j][i].setBackgroundColor(Color.BLACK);
-                                celdas[j][i].setText("");
+                                if(finalMessage.charAt(contBits) == '0') {celdas[j][i].setBackgroundColor(Color.WHITE); celdas[j][i].setText("0"); celdas[j][i].setHint("data");}
+                                else {celdas[j][i].setBackgroundColor(Color.BLACK); celdas[j][i].setText("1"); celdas[j][i].setHint("data");}
                                 contBits++;
                             }
-                            if(celdas[j][i+1].getText() == "0")
+                            if(celdas[j][i+1].getText() == "S")
                             {
-                                if(finalMessage.charAt(contBits) == '0') celdas[j][i+1].setBackgroundColor(Color.WHITE);
-                                else celdas[j][i+1].setBackgroundColor(Color.BLACK);
-                                celdas[j][i+1].setText("");
+                                if(finalMessage.charAt(contBits) == '0') {celdas[j][i+1].setBackgroundColor(Color.WHITE); celdas[j][i+1].setText("0"); celdas[j][i+1].setHint("data");}
+                                else {celdas[j][i+1].setBackgroundColor(Color.BLACK); celdas[j][i+1].setText("1"); celdas[j][i+1].setHint("data");}
                                 contBits++;
                             }
                         }
                     }
 
+                    int[] scoresMasking = new int[8]; //Data masking
+                    for(int i = 0; i < 8; i++) scoresMasking[i] = Evaluaciones(DataMasking(celdas, i)); //Patrones de data masking
+
+                    contBits = scoresMasking[0]; //Encontrar el menor penalty score
+                    for(int i = 1; i < scoresMasking.length; i++) contBits = scoresMasking[i] < contBits ? scoresMasking[i] : contBits;
+
+                    //Version final del qr con el data masking
+                    for(int i = 0; i < scoresMasking.length; i++) { if(scoresMasking[i] == contBits) {contBits = i; break;} }
+                    celdas = DataMasking(celdas, contBits);
+                    textViewVersion.setText("Versión: " + version + " - Tamaño: " + tamanio + "x" + tamanio + " - Mask Pattern: " + contBits);
+
                     
+
 
                 }
             }
@@ -1037,6 +1046,172 @@ public class MainActivity extends AppCompatActivity {
             }
         }
         return polinomio;
+    }
+
+    public int Evaluacion1(int modo, TextView[][] celdas)
+    {
+        int penalty = 0;
+        for(int i = 4; i < tamanio+4; i++)
+        {
+            ArrayList<String> bits = new ArrayList<>(); //Almacenar los datos en un arrayList
+            for(int j = 4; j < tamanio+4; j++)
+            {
+                if(modo == 1) { if(celdas[i][j].getText() == "0" || celdas[i][j].getText() == "1") bits.add((String)celdas[i][j].getText()); }
+                else if(modo == 2) { if(celdas[j][i].getText() == "0" || celdas[j][i].getText() == "1") bits.add((String)celdas[j][i].getText()); }
+            }
+
+            ArrayList<Integer> consecutivos = new ArrayList<>(); //Contar los caracteres consecutivos
+            String ultimoBit = bits.get(0);
+            int contBits = 1;
+            for(int j = 1; j < bits.size(); j++)
+            {
+                if(bits.get(j) == ultimoBit) contBits++;
+                else
+                {
+                    consecutivos.add(contBits);
+                    contBits = 1;
+                    ultimoBit = bits.get(j);
+                }
+            }
+            consecutivos.add(contBits);
+
+            for(int j = 0; j < consecutivos.size(); j++) //Añadir los penaltyPoints de la primera evaluacion
+            {
+                if(consecutivos.get(j) == 5) penalty += 3;
+                else if(consecutivos.get(j) > 5) penalty += 3 + (consecutivos.get(j)-5);
+            }
+        }
+        return penalty;
+    }
+
+    public int Evaluaciones(TextView[][] celdas)
+    {
+        int penaltyPoints = Evaluacion1(1, celdas) + Evaluacion1(2, celdas); //Evaluacion #1: 5 o mas modulos iguales en una fila o columna
+
+        for(int i = 4; i < tamanio+3; i++) //Evaluacion 2: buscar cuadros de 2x2 con los mismos modulos
+        {
+            for(int j = 4; j < tamanio+3; j++)
+            {
+                if(celdas[i][j].getText() == celdas[i+1][j].getText() && celdas[i][j].getText() == celdas[i][j+1].getText()
+                        && celdas[i][j].getText() == celdas[i+1][j+1].getText()) penaltyPoints += 3;
+            }
+        }
+
+        for(int i = 4; i < tamanio+4; i++) //Evaluacion 3: buscar 2 patrones especificos
+        {
+            for(int j = 4; j < tamanio-6; j++)
+            {
+                if(celdas[i][j].getText() == "1" && celdas[i][j+1].getText() == "0" && celdas[i][j+2].getText() == "1" && celdas[i][j+3].getText() == "1"
+                        && celdas[i][j+4].getText() == "1" && celdas[i][j+5].getText() == "0" && celdas[i][j+6].getText() == "1" && celdas[i][j+7].getText() == "0"
+                        && celdas[i][j+8].getText() == "0" && celdas[i][j+9].getText() == "0" && celdas[i][j+10].getText() == "0") penaltyPoints += 40;
+                if(celdas[i][j].getText() == "0" && celdas[i][j+1].getText() == "0" && celdas[i][j+2].getText() == "0" && celdas[i][j+3].getText() == "0"
+                        && celdas[i][j+4].getText() == "1" && celdas[i][j+5].getText() == "0" && celdas[i][j+6].getText() == "1" && celdas[i][j+7].getText() == "1"
+                        && celdas[i][j+8].getText() == "1" && celdas[i][j+9].getText() == "0" && celdas[i][j+10].getText() == "1") penaltyPoints += 40;
+            }
+        }
+
+        int negros = 0, blancos = 0; //Evaluacion 4: contar si hay mas modulos negros o blancos
+        for(int i = 4; i < tamanio+4; i++)
+        {
+            for(int j = 4; j < tamanio+4; j++)
+            {
+                if(celdas[i][j].getText() == "1") negros++;
+                else if(celdas[i][j].getText() == "0") blancos++;
+            }
+        }
+        float percentNegro = ((float)negros / (float)(negros+blancos)) * 100;
+        int multiploBajo = (int)percentNegro, multiploAlto = (int)percentNegro;
+        if(percentNegro%5 != 0)
+        {
+            for(int i = 0 ; i < 5; i++)
+            {
+                multiploAlto++;
+                if(multiploAlto%5 == 0) break;
+            }
+            for(int i = 0 ; i < 5; i++)
+            {
+                multiploBajo--;
+                if(multiploBajo%5 == 0) break;
+            }
+        }
+        multiploAlto = Math.abs(multiploAlto - 50) / 5;
+        multiploBajo = Math.abs(multiploBajo - 50) / 5;
+        penaltyPoints += multiploAlto < multiploBajo ? multiploAlto * 10 : multiploBajo * 10;
+        return penaltyPoints;
+    }
+
+    public TextView[][] DataMasking(TextView[][] celdas, int pattern)
+    {
+        TextView[][] auxCeldas = celdas;
+        for(int j = 4; j < tamanio+4; j++) //Filas
+        {
+            for(int k = 4; k < tamanio+4; k++) //Columnas
+            {
+                if(auxCeldas[j][k].getHint() == "data")
+                {
+                    switch (pattern)
+                    {
+                        case 0:
+                            if((j + k)%2 == 0)
+                            {
+                                if(auxCeldas[j][k].getText() == "0") {auxCeldas[j][k].setText("1"); auxCeldas[j][k].setBackgroundColor(Color.BLACK);}
+                                else if(auxCeldas[j][k].getText() == "1") {auxCeldas[j][k].setText("0"); auxCeldas[j][k].setBackgroundColor(Color.WHITE);}
+                            }
+                            break;
+                        case 1:
+                            if(j%2 == 0)
+                            {
+                                if(auxCeldas[j][k].getText() == "0") {auxCeldas[j][k].setText("1"); auxCeldas[j][k].setBackgroundColor(Color.BLACK);}
+                                else if(auxCeldas[j][k].getText() == "1") {auxCeldas[j][k].setText("0"); auxCeldas[j][k].setBackgroundColor(Color.WHITE);}
+                            }
+                            break;
+                        case 2:
+                            if(k%3 == 0)
+                            {
+                                if(auxCeldas[j][k].getText() == "0") {auxCeldas[j][k].setText("1"); auxCeldas[j][k].setBackgroundColor(Color.BLACK);}
+                                else if(auxCeldas[j][k].getText() == "1") {auxCeldas[j][k].setText("0"); auxCeldas[j][k].setBackgroundColor(Color.WHITE);}
+                            }
+                            break;
+                        case 3:
+                            if((j + k)%3 == 0)
+                            {
+                                if(auxCeldas[j][k].getText() == "0") {auxCeldas[j][k].setText("1"); auxCeldas[j][k].setBackgroundColor(Color.BLACK);}
+                                else if(auxCeldas[j][k].getText() == "1") {auxCeldas[j][k].setText("0"); auxCeldas[j][k].setBackgroundColor(Color.WHITE);}
+                            }
+                            break;
+                        case 4:
+                            if((Math.floor(j/2) + Math.floor(k/3))%2 == 0)
+                            {
+                                if(auxCeldas[j][k].getText() == "0") {auxCeldas[j][k].setText("1"); auxCeldas[j][k].setBackgroundColor(Color.BLACK);}
+                                else if(auxCeldas[j][k].getText() == "1") {auxCeldas[j][k].setText("0"); auxCeldas[j][k].setBackgroundColor(Color.WHITE);}
+                            }
+                            break;
+                        case 5:
+                            if(((j * k)%2) + ((j * k)%3) == 0)
+                            {
+                                if(auxCeldas[j][k].getText() == "0") {auxCeldas[j][k].setText("1"); auxCeldas[j][k].setBackgroundColor(Color.BLACK);}
+                                else if(auxCeldas[j][k].getText() == "1") {auxCeldas[j][k].setText("0"); auxCeldas[j][k].setBackgroundColor(Color.WHITE);}
+                            }
+                            break;
+                        case 6:
+                            if((((j * k)%2) + ((j * k)%3))%2 == 0)
+                            {
+                                if(auxCeldas[j][k].getText() == "0") {auxCeldas[j][k].setText("1"); auxCeldas[j][k].setBackgroundColor(Color.BLACK);}
+                                else if(auxCeldas[j][k].getText() == "1") {auxCeldas[j][k].setText("0"); auxCeldas[j][k].setBackgroundColor(Color.WHITE);}
+                            }
+                            break;
+                        case 7:
+                            if((((j + k)%2) + ((j * k)%3))%2 == 0)
+                            {
+                                if(auxCeldas[j][k].getText() == "0") {auxCeldas[j][k].setText("1"); auxCeldas[j][k].setBackgroundColor(Color.BLACK);}
+                                else if(auxCeldas[j][k].getText() == "1") {auxCeldas[j][k].setText("0"); auxCeldas[j][k].setBackgroundColor(Color.WHITE);}
+                            }
+                            break;
+                    }
+                }
+            }
+        }
+        return auxCeldas;
     }
 }
 
