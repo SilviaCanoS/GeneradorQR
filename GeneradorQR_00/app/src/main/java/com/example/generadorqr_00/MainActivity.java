@@ -30,7 +30,7 @@ public class MainActivity extends AppCompatActivity {
     int errorCorrection = 7, version, tamanio, tamanioIndicador, bitsNecesarios, bloquesCorreccion, bloquesGrupo1,
             codewordsGrupo1, bloquesGrupo2, codewordsGrupo2, bitsExtra;
     int[] alignmentPattern;
-    String cifrado;
+    String cifrado, versionInformation;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,10 +66,12 @@ public class MainActivity extends AppCompatActivity {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                tabla.removeAllViews();
+
                 version = 1;
                 tamanio = 0;
-                String text = "hello world";
-                if(editText.getText().toString().isEmpty()) editText.setText("hello world"); //Control de error
+                String text = "HELLO WORLD";
+                if(editText.getText().toString().isEmpty()) editText.setText("HELLO WORLD"); //Control de error
                 else text = editText.getText().toString();
                 String binario = "";
 
@@ -503,8 +505,8 @@ public class MainActivity extends AppCompatActivity {
                             else if(errorCorrection == 30) {bitsNecesarios = 60; bloquesCorreccion = 28;
                                 bloquesGrupo1 = 4; codewordsGrupo1 = 15; bloquesGrupo2 = 0; codewordsGrupo2 = 0;}
                             break;
-                        case 7: alignmentPattern = new int[]{6,22, 38};
-                            bitsExtra = 0;
+                        case 7:
+                            bitsExtra = 0; alignmentPattern = new int[]{6,22, 38}; versionInformation = "000111110010010100";
                             if(errorCorrection == 7) {bitsNecesarios = 156; bloquesCorreccion = 20;
                                 bloquesGrupo1 = 2; codewordsGrupo1 = 78; bloquesGrupo2 = 0; codewordsGrupo2 = 0;}
                             else if(errorCorrection == 15) {bitsNecesarios = 124; bloquesCorreccion = 18;
@@ -515,7 +517,7 @@ public class MainActivity extends AppCompatActivity {
                                 bloquesGrupo1 = 4; codewordsGrupo1 = 13; bloquesGrupo2 = 1; codewordsGrupo2 = 14;}
                             break;
                         case 8:
-                            bitsExtra = 0; alignmentPattern = new int[]{6,24, 42};
+                            bitsExtra = 0; alignmentPattern = new int[]{6,24, 42}; versionInformation = "001000010110111100";
                             if(errorCorrection == 7) {bitsNecesarios = 194; bloquesCorreccion = 24;
                                 bloquesGrupo1 = 2; codewordsGrupo1 = 97; bloquesGrupo2 = 0; codewordsGrupo2 = 0;}
                             else if(errorCorrection == 15) {bitsNecesarios = 154; bloquesCorreccion = 22;
@@ -526,7 +528,7 @@ public class MainActivity extends AppCompatActivity {
                                 bloquesGrupo1 = 4; codewordsGrupo1 = 14; bloquesGrupo2 = 2; codewordsGrupo2 = 15;}
                             break;
                         case 9:
-                            bitsExtra = 0; alignmentPattern = new int[]{6,26, 46};
+                            bitsExtra = 0; alignmentPattern = new int[]{6,26, 46}; versionInformation = "001001101010011001";
                             if(errorCorrection == 7) {bitsNecesarios = 232; bloquesCorreccion = 30;
                                 bloquesGrupo1 = 2; codewordsGrupo1 = 116; bloquesGrupo2 = 0; codewordsGrupo2 = 0;}
                             else if(errorCorrection == 15) {bitsNecesarios = 182; bloquesCorreccion = 22;
@@ -537,7 +539,7 @@ public class MainActivity extends AppCompatActivity {
                                 bloquesGrupo1 = 4; codewordsGrupo1 = 12; bloquesGrupo2 = 4; codewordsGrupo2 = 13;}
                             break;
                         case 10:
-                            bitsExtra = 0; alignmentPattern = new int[]{6,28, 50};
+                            bitsExtra = 0; alignmentPattern = new int[]{6,28, 50}; versionInformation = "001010010011010011";
                             if(errorCorrection == 7) {bitsNecesarios = 274; bloquesCorreccion = 18;
                                 bloquesGrupo1 = 2; codewordsGrupo1 = 68; bloquesGrupo2 = 2; codewordsGrupo2 = 69;}
                             else if(errorCorrection == 15) {bitsNecesarios = 216; bloquesCorreccion = 26;
@@ -548,7 +550,7 @@ public class MainActivity extends AppCompatActivity {
                                 bloquesGrupo1 = 6; codewordsGrupo1 = 15; bloquesGrupo2 = 2; codewordsGrupo2 = 16;}
                             break;
                         case 11:
-                            bitsExtra = 0; alignmentPattern = new int[]{6,30, 54};
+                            bitsExtra = 0; alignmentPattern = new int[]{6,30, 54}; versionInformation = "001011101111110110";
                             if(errorCorrection == 7) {bitsNecesarios = 324; bloquesCorreccion = 20;
                                 bloquesGrupo1 = 4; codewordsGrupo1 = 81; bloquesGrupo2 = 0; codewordsGrupo2 = 0;}
                             else if(errorCorrection == 15) {bitsNecesarios = 254; bloquesCorreccion = 30;
@@ -559,7 +561,7 @@ public class MainActivity extends AppCompatActivity {
                                 bloquesGrupo1 = 3; codewordsGrupo1 = 12; bloquesGrupo2 = 8; codewordsGrupo2 = 13;}
                             break;
                         case 12:
-                            bitsExtra = 0; alignmentPattern = new int[]{6,32, 58};
+                            bitsExtra = 0; alignmentPattern = new int[]{6,32, 58}; versionInformation = "001100011101100010";
                             if(errorCorrection == 7) {bitsNecesarios = 370; bloquesCorreccion = 24;
                                 bloquesGrupo1 = 2; codewordsGrupo1 = 92; bloquesGrupo2 = 2; codewordsGrupo2 = 93;}
                             else if(errorCorrection == 15) {bitsNecesarios = 290; bloquesCorreccion = 22;
@@ -570,7 +572,7 @@ public class MainActivity extends AppCompatActivity {
                                 bloquesGrupo1 = 7; codewordsGrupo1 = 14; bloquesGrupo2 = 4; codewordsGrupo2 = 15;}
                             break;
                         case 13:
-                            bitsExtra = 0; alignmentPattern = new int[]{6,34, 62};
+                            bitsExtra = 0; alignmentPattern = new int[]{6,34, 62}; versionInformation = "001101100001000111";
                             if(errorCorrection == 7) {bitsNecesarios = 428; bloquesCorreccion = 26;
                                 bloquesGrupo1 = 4; codewordsGrupo1 = 107; bloquesGrupo2 = 0; codewordsGrupo2 = 0;}
                             else if(errorCorrection == 15) {bitsNecesarios = 334; bloquesCorreccion = 22;
@@ -581,7 +583,7 @@ public class MainActivity extends AppCompatActivity {
                                 bloquesGrupo1 = 12; codewordsGrupo1 = 11; bloquesGrupo2 = 4; codewordsGrupo2 = 12;}
                             break;
                         case 14:
-                            bitsExtra = 3; alignmentPattern = new int[]{6,26, 46, 66};
+                            bitsExtra = 3; alignmentPattern = new int[]{6,26, 46, 66}; versionInformation = "001110011000001101";
                             if(errorCorrection == 7) {bitsNecesarios = 461; bloquesCorreccion = 30;
                                 bloquesGrupo1 = 3; codewordsGrupo1 = 115; bloquesGrupo2 = 1; codewordsGrupo2 = 116;}
                             else if(errorCorrection == 15) {bitsNecesarios = 365; bloquesCorreccion = 24;
@@ -592,7 +594,7 @@ public class MainActivity extends AppCompatActivity {
                                 bloquesGrupo1 = 11; codewordsGrupo1 = 12; bloquesGrupo2 = 5; codewordsGrupo2 = 13;}
                             break;
                         case 15:
-                            bitsExtra = 3; alignmentPattern = new int[]{6,26, 48, 70};
+                            bitsExtra = 3; alignmentPattern = new int[]{6,26, 48, 70}; versionInformation = "001111100100101000";
                             if(errorCorrection == 7) {bitsNecesarios = 523; bloquesCorreccion = 22;
                                 bloquesGrupo1 = 5; codewordsGrupo1 = 87; bloquesGrupo2 = 1; codewordsGrupo2 = 88;}
                             else if(errorCorrection == 15) {bitsNecesarios = 415; bloquesCorreccion = 24;
@@ -603,7 +605,7 @@ public class MainActivity extends AppCompatActivity {
                                 bloquesGrupo1 = 11; codewordsGrupo1 = 12; bloquesGrupo2 = 7; codewordsGrupo2 = 13;}
                             break;
                         case 16:
-                            bitsExtra = 3; alignmentPattern = new int[]{6,26, 50, 74};
+                            bitsExtra = 3; alignmentPattern = new int[]{6,26, 50, 74}; versionInformation = "010000101101111000";
                             if(errorCorrection == 7) {bitsNecesarios = 589; bloquesCorreccion = 24;
                                 bloquesGrupo1 = 5; codewordsGrupo1 = 98; bloquesGrupo2 = 1; codewordsGrupo2 = 99;}
                             else if(errorCorrection == 15) {bitsNecesarios = 453; bloquesCorreccion = 28;
@@ -614,7 +616,7 @@ public class MainActivity extends AppCompatActivity {
                                 bloquesGrupo1 = 3; codewordsGrupo1 = 15; bloquesGrupo2 = 13; codewordsGrupo2 = 16;}
                             break;
                         case 17:
-                            bitsExtra = 3; alignmentPattern = new int[]{6, 30, 54, 78};
+                            bitsExtra = 3; alignmentPattern = new int[]{6, 30, 54, 78}; versionInformation = "010001010001011101";
                             if(errorCorrection == 7) {bitsNecesarios = 647; bloquesCorreccion = 28;
                                 bloquesGrupo1 = 1; codewordsGrupo1 = 107; bloquesGrupo2 = 5; codewordsGrupo2 = 108;}
                             else if(errorCorrection == 15) {bitsNecesarios = 507; bloquesCorreccion = 28;
@@ -625,7 +627,7 @@ public class MainActivity extends AppCompatActivity {
                                 bloquesGrupo1 = 2; codewordsGrupo1 = 14; bloquesGrupo2 = 17; codewordsGrupo2 = 15;}
                             break;
                         case 18:
-                            bitsExtra = 3; alignmentPattern = new int[]{6, 30, 56, 82};
+                            bitsExtra = 3; alignmentPattern = new int[]{6, 30, 56, 82}; versionInformation = "010010101000010111";
                             if(errorCorrection == 7) {bitsNecesarios = 721; bloquesCorreccion = 30;
                                 bloquesGrupo1 = 5; codewordsGrupo1 = 120; bloquesGrupo2 = 1; codewordsGrupo2 = 121;}
                             else if(errorCorrection == 15) {bitsNecesarios = 563; bloquesCorreccion = 26;
@@ -636,7 +638,7 @@ public class MainActivity extends AppCompatActivity {
                                 bloquesGrupo1 = 2; codewordsGrupo1 = 14; bloquesGrupo2 = 19; codewordsGrupo2 = 15;}
                             break;
                         case 19:
-                            bitsExtra = 3; alignmentPattern = new int[]{6, 30, 58, 86};
+                            bitsExtra = 3; alignmentPattern = new int[]{6, 30, 58, 86}; versionInformation = "010011010100110010";
                             if(errorCorrection == 7) {bitsNecesarios = 795; bloquesCorreccion = 28;
                                 bloquesGrupo1 = 3; codewordsGrupo1 = 113; bloquesGrupo2 = 4; codewordsGrupo2 = 114;}
                             else if(errorCorrection == 15) {bitsNecesarios = 627; bloquesCorreccion = 26;
@@ -647,7 +649,7 @@ public class MainActivity extends AppCompatActivity {
                                 bloquesGrupo1 = 9; codewordsGrupo1 = 13; bloquesGrupo2 = 16; codewordsGrupo2 = 14;}
                             break;
                         case 20:
-                            bitsExtra = 3; alignmentPattern = new int[]{6, 34, 62, 90};
+                            bitsExtra = 3; alignmentPattern = new int[]{6, 34, 62, 90}; versionInformation = "010100100110100110";
                             if(errorCorrection == 7) {bitsNecesarios = 861; bloquesCorreccion = 28;
                                 bloquesGrupo1 = 3; codewordsGrupo1 = 107; bloquesGrupo2 = 5; codewordsGrupo2 = 108;}
                             else if(errorCorrection == 15) {bitsNecesarios = 669; bloquesCorreccion = 26;
@@ -873,8 +875,83 @@ public class MainActivity extends AppCompatActivity {
                     celdas = DataMasking(celdas, contBits);
                     textViewVersion.setText("Versión: " + version + " - Tamaño: " + tamanio + "x" + tamanio + " - Mask Pattern: " + contBits);
 
-                    
+                    String format = ""; //Información de formato
+                    switch (errorCorrection)
+                    {
+                        case 7:
+                            if(contBits == 0) format = "111011111000100";
+                            else if(contBits == 1) format = "111001011110011";
+                            else if(contBits == 2) format = "111110110101010";
+                            else if(contBits == 3) format = "111100010011101";
+                            else if(contBits == 4) format = "110011000101111";
+                            else if(contBits == 5) format = "110001100011000";
+                            else if(contBits == 6) format = "110110001000001";
+                            else if(contBits == 7) format = "110100101110110"; break;
+                        case 15:
+                            if(contBits == 0) format = "101010000010010";
+                            else if(contBits == 1) format = "101000100100101";
+                            else if(contBits == 2) format = "101111001111100";
+                            else if(contBits == 3) format = "101101101001011";
+                            else if(contBits == 4) format = "100010111111001";
+                            else if(contBits == 5) format = "100000011001110";
+                            else if(contBits == 6) format = "100111110010111";
+                            else if(contBits == 7) format = "100101010100000"; break;
+                        case 25:
+                            if(contBits == 0) format = "011010101011111";
+                            else if(contBits == 1) format = "011000001101000";
+                            else if(contBits == 2) format = "011111100110001";
+                            else if(contBits == 3) format = "011101000000110";
+                            else if(contBits == 4) format = "010010010110100";
+                            else if(contBits == 5) format = "010000110000011";
+                            else if(contBits == 6) format = "010111011011010";
+                            else if(contBits == 7) format = "010101111101101"; break;
+                        case 30:
+                            if(contBits == 0) format = "001011010001001";
+                            else if(contBits == 1) format = "001001110111110";
+                            else if(contBits == 2) format = "001110011100111";
+                            else if(contBits == 3) format = "001100111010000";
+                            else if(contBits == 4) format = "000011101100010";
+                            else if(contBits == 5) format = "000001001010101";
+                            else if(contBits == 6) format = "000110100001100";
+                            else if(contBits == 7) format = "000100000111011"; break;
+                    }
 
+                    int auxCont = 0, auxReversa = format.length()-1; //Agregar la fotmat information
+                    for(int i = 4; i < 13; i++)
+                    {
+                        if(celdas[12][i].getText() == "2" && format.charAt(auxCont) == '0') {celdas[12][i].setBackgroundColor(Color.WHITE); auxCont++;} //Horizontal izquierda
+                        else if(celdas[12][i].getText() == "2" && format.charAt(auxCont) == '1') {celdas[12][i].setBackgroundColor(Color.BLACK); auxCont++;} //Horizontal izquierda
+
+                        if(celdas[i][12].getText() == "2" && format.charAt(auxReversa) == '0') {celdas[i][12].setBackgroundColor(Color.WHITE); auxReversa--;} //Vertical arriba
+                        else if(celdas[i][12].getText() == "2" && format.charAt(auxReversa) == '1') {celdas[i][12].setBackgroundColor(Color.BLACK); auxReversa--;} //Vertical arriba
+                    }
+                    auxCont = 0; auxReversa = format.length()-1;
+                    for(int i = tamanio+4; i >= tamanio-4; i--)
+                    {
+                        if(celdas[12][i].getText() == "2" && format.charAt(auxReversa) == '0') {celdas[12][i].setBackgroundColor(Color.WHITE); auxReversa--;} //Horizontal derecha
+                        else if(celdas[12][i].getText() == "2" && format.charAt(auxReversa) == '1') {celdas[12][i].setBackgroundColor(Color.BLACK); auxReversa--;} //Horizontal derecha
+
+                        if(celdas[i][12].getText() == "2" && format.charAt(auxCont) == '0') {celdas[i][12].setBackgroundColor(Color.WHITE); auxCont++;} //Vertical abajo
+                        else if(celdas[i][12].getText() == "2" && format.charAt(auxCont) == '1') {celdas[i][12].setBackgroundColor(Color.BLACK); auxCont++;} //Vertical abajo
+                    }
+
+                    if(version >= 7) //Agregar la version information area para los qr a partir de la version 7
+                    {
+                        auxReversa = versionInformation.length()-1; auxCont = versionInformation.length()-1;
+                        for(int i = tamanio-6; i >= tamanio-3; i++)
+                        {
+                            for(int j = 4; j < 11; i++)
+                            {
+                                if(celdas[i][j].getText() == "3" && versionInformation.charAt(auxReversa) == '0') {celdas[i][j].setBackgroundColor(Color.WHITE); auxReversa--;} //Superior derecha
+                                else if(celdas[i][j].getText() == "3" && versionInformation.charAt(auxReversa) == '1') {celdas[i][j].setBackgroundColor(Color.BLACK); auxReversa--;} //Superior derecha
+
+                                if(celdas[j][i].getText() == "3" && versionInformation.charAt(auxCont) == '0') {celdas[j][i].setBackgroundColor(Color.WHITE); auxCont--;} //Inferior izquierda
+                                else if(celdas[j][i].getText() == "3" && versionInformation.charAt(auxCont) == '1') {celdas[j][i].setBackgroundColor(Color.BLACK); auxCont--;} //Inferior izquierda
+                            }
+                        }
+                    }
+
+                    for(int i = 4; i < tamanio+4; i++){ for(int j = 4; j < tamanio+4; j++) { celdas[i][j].setText(""); celdas[i][j].setHint(""); } } //Quitar el texto de los cuadros
 
                 }
             }
